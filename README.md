@@ -10,8 +10,8 @@
 
 
 ## Existant:
- 0) Création de personnage
- 1) Système de combat
- 2) Attaque et attaque Spé. (ne nécessitant pas de mana)
- 3) Protection des Héros et arrêt de protection en fin de manche.
+0) Création de personnage
+1) Système de combat
+2) Attaque et attaque Spé. (ne nécessitant pas de mana)
+3) Protection des Héros et arrêt de protection en fin de manche.
 4) Mort des personnages (ne reviennent pas à la vie)

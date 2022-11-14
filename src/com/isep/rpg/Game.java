@@ -20,11 +20,15 @@ public class Game {
         // Liste qui contient les Héros en vie
         List<Combattant> heros = new ArrayList<>();
 
-        System.out.println(" Veuillez choisir le nombre de héros partant à l'aventure ? ");
+        System.out.println(" Veuillez choisir le nombre de héros partant à l'aventure.");
         Scanner scanner = new Scanner(System.in);
         int nb_Hero = scanner.nextInt();
         for (int i = 0; i < nb_Hero; i++) {
-            System.out.println(" Quel type de héro ... ?");
+            System.out.println(" Quel sera votre héro n°" + i+1 + " ?");
+            //System.out.println("1- Warrior : Fort et courageux, ce combattant polyvalent allie une attaque et une défense modérée. \n" +
+            //        "2- Hunter : Un manieur d'arme à distance ayant une faible résistance aux dégats mais une attaque spéciale efficace.\n" +
+            //        "3- Mage : Un maître de sortilèges offensifs, caractérisé par ses puissantes attaques et sa faible défense. \n" +
+            //        "4- Healer : Expert en sort de régénération. Malgré son manque de point de vie, il possède une très solide protection en mode défense et la capacité de soigner ses compagnons.");
             while (!scanner.hasNextInt()) {
                 scanner.nextLine(); //clear the invalid input before prompting again
                 System.out.println("Veuillez sélectionner le numéro du héro souhaité :  ");
@@ -69,11 +73,6 @@ public class Game {
                     break;
 
             }
-
-            /*for (int manche = 0; manche < 4; manche++) {
-
-            }*/
-
 
         }
         //##########################################################################################################
@@ -124,6 +123,7 @@ public class Game {
                     TimeUnit.SECONDS.sleep(5);
 
                 }
+
                 //VERIFICATION MORT DU VILAIN
                 if (badOne.getHealthPoint() <= 0) {
                     System.out.println("Les Héros ont vaincu " + badOne.getName() + " !");
@@ -237,5 +237,19 @@ public class Game {
         }
         System.out.println("#########################");
     }
+
+
+
+
+    /*
+    #################################################################################################################
+                                                UTILS
+    #################################################################################################################
+    if (goodOne instanceof Hunter) {
+                        ((Hunter) goodOne).rechargeFleche(n);                   //Rajout de n flèche si le héro
+                                                                                // est un Hunter
+                    }
+
+     */
 }
 

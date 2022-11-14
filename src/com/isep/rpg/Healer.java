@@ -27,4 +27,17 @@ public class Healer extends SpellCaster{
         System.out.println(getName() + " se protège !");
         isProtected = true;
     }
+
+    // Implémentation de la méthode abstraite "take" par le Healer :
+    //   Le guerrier ne peut utiliser que les objets de type "Weapon"
+    @Override
+    public void take(Item item) {
+        if (item instanceof Weapon) {
+            weapon = (Weapon) item;
+        } else {
+            System.out.println("Oups ! " + item.getName() + " ne convient pas aux Healer !");
+        }
+    }
+
+    private Weapon weapon;
 }

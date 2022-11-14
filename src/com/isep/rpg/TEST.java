@@ -61,7 +61,12 @@ import java.util.*;
     }*/
     public class TEST {
         public static void main(String[] args) {
-            int i =0;
+            System.out.println("1- Warrior : Fort et courageux, ce combattant polyvalent allie une attaque et une défense modérée. \n" +
+                    "2- Hunter : Un manieur d'arme à distance ayant une faible résistance aux dégats mais une attaque spéciale efficace.\n" +
+                    "3- Mage : Un maître de sortilèges offensifs, caractérisé par ses puissantes attaques et sa faible défense. \n" +
+                    "4- Healer : Expert en sort de régénération. Malgré son manque de point de vie, il possède une très solide protection en mode défense et la capacité de soigner ses compagnons.");
+
+            /*int i =0;
             while(true){
 
                 System.out.println(i);
@@ -72,6 +77,6 @@ import java.util.*;
                 }
                 i++;
             }
-            System.out.println("fini");
+            System.out.println("fini");*/
         }
 }

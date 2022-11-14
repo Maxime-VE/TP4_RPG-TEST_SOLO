@@ -2,8 +2,10 @@ package com.isep.rpg;
 
 public abstract class Item {
 
-    public Item(String name) {
+    public Item(String name, String etat) {
         this.name = name;
+        description = etat;
+
     }
 
     public String getName() {
@@ -11,4 +13,5 @@ public abstract class Item {
     }
 
     private String name;
+    private String description;
 }

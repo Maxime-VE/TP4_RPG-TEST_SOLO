@@ -24,7 +24,9 @@ public class Hunter extends Hero{
     }
 
     public void rechargeFleche(int recharge) {
+
         compteur_fleche += recharge;
+        System.out.println(getName() + " reçoit " + recharge + " flèches ! ");
     }
 
     @Override
@@ -39,9 +41,21 @@ public class Hunter extends Hero{
                 "4- Objet");
     }
 
-
     public void protection() {
         System.out.println(getName() + " se protège !");
         isProtected = true;
     }
+
+    // Implémentation de la méthode abstraite "take" par le Hunter :
+    //   Le guerrier ne peut utiliser que les objets de type "Weapon"
+    @Override
+    public void take(Item item) {
+        if (item instanceof Weapon) {
+            weapon = (Weapon) item;
+        } else {
+            System.out.println("Oups ! " + item.getName() + " ne convient pas aux Hunter !");
+        }
+    }
+
+    private Weapon weapon;
 }

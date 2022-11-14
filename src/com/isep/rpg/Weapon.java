@@ -2,8 +2,8 @@ package com.isep.rpg;
 
 public class Weapon extends Item {
 
-    public Weapon(String name, int damagePoints) {
-        super(name);
+    public Weapon(String name, String description, int damagePoints) {
+        super(name, description);
         this.damagePoints = damagePoints;
     }
 

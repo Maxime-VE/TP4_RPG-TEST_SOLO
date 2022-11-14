@@ -29,4 +29,18 @@ public class Warrior extends Hero{
         System.out.println(getName() + " lance une attaque spéciale !");
         combattant.loose(getDegat()*2);
     }
+
+    // Implémentation de la méthode abstraite "take" par le Warrior :
+    //   Le guerrier ne peut utiliser que les objets de type "Weapon"
+    @Override
+    public void take(Item item) {
+        if (item instanceof Weapon) {
+            weapon = (Weapon) item;
+        } else {
+            System.out.println("Oups ! " + item.getName() + " ne convient pas aux Warrior !");
+        }
+    }
+
+    private Weapon weapon;
+
 }

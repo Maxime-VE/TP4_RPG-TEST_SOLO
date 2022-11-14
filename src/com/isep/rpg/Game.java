@@ -24,7 +24,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         int nb_Hero = scanner.nextInt();
         for (int i = 0; i < nb_Hero; i++) {
-            System.out.println(" Quel sera votre héro n°" + i+1 + " ?");
+            System.out.println(" Quel sera votre héro n°" + (i+1) + " ?");
             //System.out.println("1- Warrior : Fort et courageux, ce combattant polyvalent allie une attaque et une défense modérée. \n" +
             //        "2- Hunter : Un manieur d'arme à distance ayant une faible résistance aux dégats mais une attaque spéciale efficace.\n" +
             //        "3- Mage : Un maître de sortilèges offensifs, caractérisé par ses puissantes attaques et sa faible défense. \n" +
@@ -40,7 +40,8 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Warrior : ");
                     Scanner scan1 = new Scanner(System.in);
                     String nom_Hero1 = scan1.nextLine();
-                    Warrior w = new Warrior(nom_Hero1, 10, 4, false);
+                    Warrior w = new Warrior(nom_Hero1, 10, 2, false);
+                    w.take( new Weapon("knife","jeune cut", 1) );
                     heros.add(w);
                     break;
 
@@ -87,12 +88,13 @@ public class Game {
         //##########################################################################################################
         // FIN INITIALISATION & DEBUT DE LA PARTIE
         //##########################################################################################################
+        TimeUnit.SECONDS.sleep(4);
         System.out.println(" Début de la partie ");
         int idHero = 0;
         int idEnemy = 0;
-        for (int manche = 0; manche < 1; manche++) {    // Compteur de manche
+        for (int manche = 0; manche < enemies.size(); manche++) {    // Compteur de manche
             displayStatus(heros,enemies);
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(4);
 
             //ATTAQUE DES HEROS
             while(true) {
@@ -160,7 +162,7 @@ public class Game {
 
         }
 
-        System.out.println("Félicitation jeune aventurier, tu as vaincu l'ensemble de tes ennemies et sauver l'humanité ! \n" +
+        System.out.println("Félicitation jeune aventurier, tu as vaincu l'ensemble de tes ennemies et sauvé l'humanité ! \n" +
                 "Tu es digne de devenir chevalier de notre royaume !");
 
 

@@ -8,9 +8,9 @@ public abstract class Item {
 
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() {return name;}
+    public String getDescription() {return description;}
+
 
     private String name;
     private String description;

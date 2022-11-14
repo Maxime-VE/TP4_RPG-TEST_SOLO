@@ -36,6 +36,8 @@ public class Warrior extends Hero{
     public void take(Item item) {
         if (item instanceof Weapon) {
             weapon = (Weapon) item;
+            System.out.println(getName() + " se voit confier l'arme " + item.getName() + " (+" + ((Weapon) item).getDamagePoints() + " dégats)");
+            degat = getDegat() + ((Weapon) item).getDamagePoints();
         } else {
             System.out.println("Oups ! " + item.getName() + " ne convient pas aux Warrior !");
         }

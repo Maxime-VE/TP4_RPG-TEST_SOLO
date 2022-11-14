@@ -36,7 +36,7 @@ public abstract class Combattant {
 
     private String name;
     private int healthPoint;
-    private int degat;
+    public int degat;
 
     public boolean isProtected;
 }

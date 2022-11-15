@@ -44,7 +44,7 @@ public class Healer extends SpellCaster{
     }
 
     @Override
-    public void changeWeapon(Item item) {
+    public void changeWeapon(Weapon item) {
 
     }
     private Weapon weapon;

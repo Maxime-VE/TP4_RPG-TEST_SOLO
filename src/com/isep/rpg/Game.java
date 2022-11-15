@@ -109,6 +109,7 @@ public class Game {
                     TimeUnit.SECONDS.sleep(3);
                     action(goodOne, badOne);
                     TimeUnit.SECONDS.sleep(3);
+ //TEST                   ((Hero) goodOne).changeWeapon(new Weapon("Da cut","cool cut",8));
                     if (idHero == heros.size() - 1) {
                         idHero = 0;
                     } else {
@@ -209,7 +210,7 @@ public class Game {
 
                 case 1:
                     c.fight(combattant);
-                    System.out.println(c.getName() + " inflige " + c.getDegat() + " points de dégât à " + combattant.getName());
+                    System.out.println(c.getName() + " inflige " + c.getDegat() + " points de dégât à " + combattant.getName()); // getDegat à modifier en egatTotal @TODO
                     break;
 
                 case 2:
@@ -241,11 +242,17 @@ public class Game {
     }
 
 
+//    #################################################################################################################
+//                                                  LISTE
+//    #################################################################################################################
+
+    List<List<Weapon>> WeaponList = new ArrayList<List<Weapon>>();
+
 
 
     /*
     #################################################################################################################
-                                                UTILS
+                                                    UTILS
     #################################################################################################################
     if (goodOne instanceof Hunter) {
                         ((Hunter) goodOne).rechargeFleche(n);                   //Rajout de n flèche si le héro

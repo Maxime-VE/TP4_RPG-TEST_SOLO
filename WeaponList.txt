@@ -1,0 +1,22 @@
+Warrior: Commun: "Couteau","Lance","Epée","Machette","Dague","Hache","Epée longue","Epée courte"
+         Rare:"Sabre","Katana","Tonfa","Dague magique"
+         Epique:"Faux","Trident","Hallebarde"
+         Légendaire:"Mjöllnir","Excalibur"
+
+
+Hunter: Commun:"Arc court","Arc long","Arbalète"
+        Rare:"Arc amélioré","Arc perforant
+        Epique:"Arc ensorcelé","Arbalète ensorcelée"
+        Légendaire:"Arc d'Ulysse","Arc d'Artémis"
+
+Mage: Commun:"Baguette magique", "Bâton neutre","Grimoire interdit"
+      Rare:"Bâton de feu","Bâton de vent","Bâton de la forêt","Bâton de glace"
+      Epique:"Baguette Météore","Foudrekane"
+      Légendaire:"Foudre de Zeus"
+
+Healer: Commun:"Bracelet","Bague de régénération","Charme de soin","Pendentif magique","Couronne magique"
+        Rare:"Bracelet d'Athéna","Bague de Prométhée","Brassard de Lion"
+        Epique:"Collier d'Eir","Amulette merveilleuse"
+        Légendaire:"Le Caducée","Graal","Plume de Phoenix"
+
+

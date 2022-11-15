@@ -1,6 +1,8 @@
 package com.isep.rpg;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Warrior extends Hero{
 
@@ -45,17 +47,27 @@ public class Warrior extends Hero{
     }
 
     @Override
-    public void changeWeapon(Item item) {
-        if (currentWeaponList.size()== 0) {
+    public void changeWeapon(Weapon item) {
+        System.out.println(getName() + " récupère " + item.getName()+ " (+" + ((Weapon) item).getDamagePoints() + " dégats)");
+        if (currentWeaponList.size() == 0) {
             take(item);
         } else {
             Weapon currentWeapon = currentWeaponList.get(0);
-            System.out.println(getName() + "possède déjà " + currentWeapon.getName() + " (+" + currentWeapon.getDamagePoints() + " dégats)" );
-            System.out.println("Souhaitez-vous changer l'équipement de " + getName() + " ?");
+            System.out.println("Mais " + getName() + " possède déjà " + currentWeapon.getName() + " (+" + currentWeapon.getDamagePoints() + " dégats)" );
+            System.out.println("Souhaitez-vous changer l'équipement de " + getName() + " ? [y/n]");
+            Scanner scanChoixWeapon = new Scanner(System.in);
+            String choixWeapon = scanChoixWeapon.nextLine();
+            if (Objects.equals(choixWeapon, "y")) {
+                take(item);
+            } else if (Objects.equals(choixWeapon, "n")) {
+                System.out.println(getName() + " laisse " + item.getName());
+            }else{
+                changeWeapon(item);
+            }
         }
     }
     ArrayList<Weapon> currentWeaponList = new ArrayList<>();
-    int degatTotal = degat;
+    public int degatTotal = degat;
     private Weapon weapon;
 
 }

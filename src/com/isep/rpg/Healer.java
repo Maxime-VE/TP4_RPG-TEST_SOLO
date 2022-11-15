@@ -6,14 +6,20 @@ public class Healer extends SpellCaster{
     public Healer(String n, int h, int d, boolean def) {super(n, h, d, def);}
 
 
-    int heal = -20;
-
     public void special(Combattant combattant) {
-        System.out.println("Qui " + getName() + " va t-il soigner ?");
-        Scanner choixSoin = new Scanner(System.in);
-        int idSoin = choixSoin.nextInt();
+        if (mana < coutSoin){
+            System.out.println(getName() + " n'a plus assez de mana, " + getName() + " médite pendant ce tour et reçoit +5 Mana");
+            mana += 5;
+        }else{
+            System.out.println(combattant.getName() + " reçoit +" + Math.abs(heal) + "PV");
+            combattant.loose(heal);
+            mana -= coutSoin;
+            System.out.println("Il reste " + mana + " Mana à " + getName());
+        }
 
     }
+
+
     @Override
     public void fight(Combattant combattant) {
         System.out.println(getName() + " lance une attaque !");
@@ -22,9 +28,10 @@ public class Healer extends SpellCaster{
 
     public void sayAction() {
         System.out.println("1- Attaque \n" +
-                "2- Soin \n" +
+                "2- Soin : +" + (int) Math.abs(heal) + "PV (coûte "+ coutSoin + " Mana)\n" +
                 "3- Protection \n" +
-                "4- Objet");
+                "4- Objet \n" +
+                "Mana actuel : " + mana);
     }
 
     public void protection() {
@@ -48,4 +55,7 @@ public class Healer extends SpellCaster{
 
     }
     private Weapon weapon;
+    public int mana = (getDegat()+ getHealthPoint()*3);
+    int heal = -20;
+    public int coutSoin = 100;
 }

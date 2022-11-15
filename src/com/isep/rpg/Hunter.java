@@ -40,7 +40,8 @@ public class Hunter extends Hero{
         System.out.println("1- Attaque \n" +
                 "2- Tir à l'arc (Consomme 1 flèche) \n" +
                 "3- Protection \n" +
-                "4- Objet");
+                "4- Objet \n" +
+                "Nombre de flèche(s) actuelle(s) : " + compteur_fleche);
     }
 
     public void protection() {

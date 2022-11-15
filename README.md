@@ -1,21 +1,24 @@
 # Projet TP4 - RPG
 
 ## A faire:
+
 0) Implémentation des armes 
-    -->[URGENT : Fonction changement d'arme -> retrouver les dégats d'origine  (Fait)
+    -->Fonction changement d'arme -> retrouver les dégats d'origine -------------- (Fait)
                  Liste d'armes utilisables ->WeaponList.txt -> Implémentation
-                 Utilisation sur catégorie de héro]
-1) Implémentation du mana / attaque Spé pour SpellCaster
+                 [Utilisation sur catégorie de héro]
+1) Implémentation du mana   -----------------------------------------------------(Fait)
     --> Pareil que pour les flèches
-2) Implémentation des consommables potion/nourriture.
-3) Loot de fin de manche
-4) Bénédiction de début de partie
-5) upgrade de fin de manche
-6) Event ?
+2) [Implémentation des consommables potion/nourriture.] 
+3) [SKIP TXT METHOD]
+4) Loot de fin de manche
+5) Bénédiction de début de partie
+6) upgrade de fin de manche
+7) Event ?
+8) COULEUR
 
 ## Existant:
 0) Création de personnage
 1) Système de combat
-2) Attaque et attaque Spé. (ne nécessitant pas de mana)
+2) Attaque et attaque Spé.
 3) Protection des Héros et arrêt de protection en fin de manche.
 4) Mort des personnages (ne reviennent pas à la vie)

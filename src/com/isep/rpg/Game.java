@@ -40,7 +40,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Warrior : ");
                     Scanner scan1 = new Scanner(System.in);
                     String nom_Hero1 = scan1.nextLine();
-                    Warrior w = new Warrior(nom_Hero1, 10, 2, false);
+                    Warrior w = new Warrior(nom_Hero1, 11, 6, false);
                     w.take( new Weapon("knife","jeune cut", 1) );
                     heros.add(w);
                     break;
@@ -49,7 +49,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Hunter : ");
                     Scanner scan2 = new Scanner(System.in);
                     String nom_Hero2 = scan2.nextLine();
-                    Hunter hu = new Hunter(nom_Hero2, 10, 3, false);
+                    Hunter hu = new Hunter(nom_Hero2, 12, 5, false);
                     heros.add(hu);
                     break;
 
@@ -57,7 +57,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Mage : ");
                     Scanner scan3 = new Scanner(System.in);
                     String nom_Hero3 = scan3.nextLine();
-                    Mage m = new Mage(nom_Hero3, 10, 3, false);
+                    Mage m = new Mage(nom_Hero3, 13, 4, false);
                     heros.add(m);
                     break;
 
@@ -65,7 +65,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Healer : ");
                     Scanner scan4 = new Scanner(System.in);
                     String nom_Hero4 = scan4.nextLine();
-                    Healer h = new Healer(nom_Hero4, 10, 3, false);
+                    Healer h = new Healer(nom_Hero4, 14, 3, false);
                     heros.add(h);
                     break;
 
@@ -107,7 +107,7 @@ public class Game {
                     System.out.println(" Que va faire " + goodOne.getName() + "?");
                     goodOne.sayAction();
                     TimeUnit.SECONDS.sleep(3);
-                    action(goodOne, badOne);
+                    action(goodOne, badOne,heros);
                     TimeUnit.SECONDS.sleep(3);
  //TEST                   ((Hero) goodOne).changeWeapon(new Weapon("Da cut","cool cut",8));
                     if (idHero == heros.size() - 1) {
@@ -198,7 +198,7 @@ public class Game {
         System.out.println("#########################");
     }
 
-    private static void action(Combattant c, Combattant combattant) {
+    private static void action(Combattant c, Combattant combattant,List<Combattant> h) {
         Scanner scanAction = new Scanner(System.in);
         for (int compteurAction = 0 ; compteurAction < 1 ; compteurAction++) {
             while (!scanAction.hasNextInt()) {
@@ -210,11 +210,24 @@ public class Game {
 
                 case 1:
                     c.fight(combattant);
-                    System.out.println(c.getName() + " inflige " + c.getDegat() + " points de dégât à " + combattant.getName()); // getDegat à modifier en egatTotal @TODO
+                    System.out.println(c.getName() + " inflige " + c.getDegat() + " points de dégât à " + combattant.getName()); // getDegat à modifier en degatTotal @TODO
                     break;
 
                 case 2:
-                    c.special(combattant);
+                    if (c instanceof Healer) {
+                        System.out.println("Qui est-ce que " + c.getName() + " souhaite soigner ?");
+                        int compteurid = 1;
+                        for(Combattant ally :h) {
+                            System.out.println(compteurid + "- " + ally.getName() + " : " + ally.getHealthPoint() + "PV");
+                            compteurid++;
+                        }
+                        Scanner choixSoin = new Scanner(System.in);
+                        int idSoin = choixSoin.nextInt();
+                        c.special(h.get((idSoin-1)));
+                    }else{
+                        c.special(combattant);
+                    }
+
                     break;
 
                 case 3:

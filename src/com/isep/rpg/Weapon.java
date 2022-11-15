@@ -11,6 +11,7 @@ public class Weapon extends Item {
         return damagePoints;
     }
 
+
     // Une arme inflige des points de dégats
     private int damagePoints;
 }

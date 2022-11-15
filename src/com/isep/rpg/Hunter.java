@@ -1,5 +1,7 @@
 package com.isep.rpg;
-import java.util.concurrent.TimeUnit;
+
+
+import java.util.ArrayList;
 
 public class Hunter extends Hero{
 
@@ -7,7 +9,6 @@ public class Hunter extends Hero{
         super(n, h, d, def);
     }
 
-    int compteur_fleche = 1;
 
     public void special(Combattant combattant) {
         if (compteur_fleche != 0) {
@@ -56,6 +57,11 @@ public class Hunter extends Hero{
             System.out.println("Oups ! " + item.getName() + " ne convient pas aux Hunter !");
         }
     }
+    @Override
+    public void changeWeapon(Item item) {
+
+    }
 
     private Weapon weapon;
+    int compteur_fleche = 1;
 }

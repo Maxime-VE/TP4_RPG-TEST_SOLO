@@ -38,5 +38,10 @@ public class Mage extends SpellCaster{
         }
     }
 
+    @Override
+    public void changeWeapon(Item item) {
+
+    }
+
     private Weapon weapon;
 }

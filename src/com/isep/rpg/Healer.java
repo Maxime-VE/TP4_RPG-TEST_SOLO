@@ -1,5 +1,7 @@
 package com.isep.rpg;
 
+import java.util.Scanner;
+
 public class Healer extends SpellCaster{
     public Healer(String n, int h, int d, boolean def) {super(n, h, d, def);}
 
@@ -7,8 +9,10 @@ public class Healer extends SpellCaster{
     int heal = -20;
 
     public void special(Combattant combattant) {
-        System.out.println(getName() + " soigne " + combattant);
-        combattant.loose(heal);
+        System.out.println("Qui " + getName() + " va t-il soigner ?");
+        Scanner choixSoin = new Scanner(System.in);
+        int idSoin = choixSoin.nextInt();
+
     }
     @Override
     public void fight(Combattant combattant) {
@@ -39,5 +43,9 @@ public class Healer extends SpellCaster{
         }
     }
 
+    @Override
+    public void changeWeapon(Item item) {
+
+    }
     private Weapon weapon;
 }

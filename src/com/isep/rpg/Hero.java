@@ -12,5 +12,7 @@ public abstract class Hero extends Combattant{
     // utilisation dépend du type du héro (Epée -> Warrior  Baton -> Mage)
     public abstract void take(Item item);
 
+    public abstract void changeWeapon(Item item);
+
 
 }

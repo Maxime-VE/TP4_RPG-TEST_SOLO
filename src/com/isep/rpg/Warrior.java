@@ -1,17 +1,17 @@
 package com.isep.rpg;
 
+import java.util.ArrayList;
+
 public class Warrior extends Hero{
 
     public Warrior(String n, int h, int d, boolean def) {
         super(n, h, d, def);
     }
 
-
-
     @Override
     public void fight(Combattant combattant) {
         System.out.println(getName() + " lance une attaque !");
-        combattant.loose(getDegat());
+        combattant.loose(degatTotal);
     }
     public void sayAction() {
         System.out.println("1- Attaque \n" +
@@ -27,7 +27,7 @@ public class Warrior extends Hero{
 
     public void special(Combattant combattant) {
         System.out.println(getName() + " lance une attaque spéciale !");
-        combattant.loose(getDegat()*2);
+        combattant.loose(degatTotal*2);
     }
 
     // Implémentation de la méthode abstraite "take" par le Warrior :
@@ -37,12 +37,25 @@ public class Warrior extends Hero{
         if (item instanceof Weapon) {
             weapon = (Weapon) item;
             System.out.println(getName() + " se voit confier l'arme " + item.getName() + " (+" + ((Weapon) item).getDamagePoints() + " dégats)");
-            degat = getDegat() + ((Weapon) item).getDamagePoints();
+            degatTotal = getDegat() + ((Weapon) item).getDamagePoints();
+            currentWeaponList.add(weapon);
         } else {
             System.out.println("Oups ! " + item.getName() + " ne convient pas aux Warrior !");
         }
     }
 
+    @Override
+    public void changeWeapon(Item item) {
+        if (currentWeaponList.size()== 0) {
+            take(item);
+        } else {
+            Weapon currentWeapon = currentWeaponList.get(0);
+            System.out.println(getName() + "possède déjà " + currentWeapon.getName() + " (+" + currentWeapon.getDamagePoints() + " dégats)" );
+            System.out.println("Souhaitez-vous changer l'équipement de " + getName() + " ?");
+        }
+    }
+    ArrayList<Weapon> currentWeaponList = new ArrayList<>();
+    int degatTotal = degat;
     private Weapon weapon;
 
 }

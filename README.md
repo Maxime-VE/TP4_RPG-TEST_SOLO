@@ -3,7 +3,7 @@
 ## A faire:
 0) Implémentation des armes 
     -->[URGENT : Fonction changement d'arme -> retrouver les dégats d'origine  (Fait)
-                 Liste d'armes utilisables
+                 Liste d'armes utilisables ->WeaponList.txt -> Implémentation
                  Utilisation sur catégorie de héro]
 1) Implémentation du mana / attaque Spé pour SpellCaster
     --> Pareil que pour les flèches

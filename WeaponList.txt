@@ -14,7 +14,7 @@ Mage: Commun:"Baguette magique", "Bâton neutre","Grimoire interdit"
       Epique:"Baguette Météore","Foudrekane"
       Légendaire:"Foudre de Zeus"
 
-Healer: Commun:"Bracelet","Bague de régénération","Charme de soin","Pendentif magique","Couronne magique"
+Healer: Commun:"Diadème","Bague de régénération","Charme de soin","Pendentif magique","Couronne magique"
         Rare:"Bracelet d'Athéna","Bague de Prométhée","Brassard de Lion"
         Epique:"Collier d'Eir","Amulette merveilleuse"
         Légendaire:"Le Caducée","Graal","Plume de Phoenix"

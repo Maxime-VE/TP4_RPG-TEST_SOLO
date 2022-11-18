@@ -61,11 +61,6 @@ import java.util.*;
     }*/
     public class TEST {
         public static void main(String[] args) {
-            System.out.println("Blabla");
-            System.out.println("\033[0;31m" + "RED COLORED" +
-                    "\033[0m" + " NORMAL");
-            Scanner scan = new Scanner(System.in);
-            String delay = scan.nextLine();
             //System.out.println("");
             System.out.println("Blabla");
 
@@ -87,4 +82,6 @@ import java.util.*;
             }
             System.out.println("fini");*/
         }
+
+
 }

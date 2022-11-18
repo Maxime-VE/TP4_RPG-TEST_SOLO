@@ -41,7 +41,7 @@ public class Game {
                     Scanner scan1 = new Scanner(System.in);
                     String nom_Hero1 = scan1.nextLine();
                     Warrior w = new Warrior(nom_Hero1, 11, 6, false);
-                    w.take( new Weapon("knife","jeune cut", 1) );
+                    w.take( new Weapon("Couteau","commun", 1) );
                     heros.add(w);
                     break;
 
@@ -50,6 +50,7 @@ public class Game {
                     Scanner scan2 = new Scanner(System.in);
                     String nom_Hero2 = scan2.nextLine();
                     Hunter hu = new Hunter(nom_Hero2, 12, 5, false);
+                    hu.take( new Weapon("Arc","commun", 1) );
                     heros.add(hu);
                     break;
 
@@ -58,6 +59,7 @@ public class Game {
                     Scanner scan3 = new Scanner(System.in);
                     String nom_Hero3 = scan3.nextLine();
                     Mage m = new Mage(nom_Hero3, 13, 4, false);
+                    m.take( new Weapon("Baguette d'apprenti","commun", 1) );
                     heros.add(m);
                     break;
 
@@ -66,6 +68,7 @@ public class Game {
                     Scanner scan4 = new Scanner(System.in);
                     String nom_Hero4 = scan4.nextLine();
                     Healer h = new Healer(nom_Hero4, 14, 3, false);
+                    h.take( new Weapon("Bracelet de renforcement","commun", 1) );
                     heros.add(h);
                     break;
 
@@ -88,13 +91,14 @@ public class Game {
         //##########################################################################################################
         // FIN INITIALISATION & DEBUT DE LA PARTIE
         //##########################################################################################################
-        TimeUnit.SECONDS.sleep(4);
+
         System.out.println(" Début de la partie ");
+        userDelay();
         int idHero = 0;
         int idEnemy = 0;
         for (int manche = 0; manche < enemies.size(); manche++) {    // Compteur de manche
             displayStatus(heros,enemies);
-            TimeUnit.SECONDS.sleep(4);
+            userDelay();
 
             //ATTAQUE DES HEROS
             while(true) {
@@ -103,13 +107,12 @@ public class Game {
                 Combattant badOne = enemies.get(idEnemy);
 
                 for (int compteurListeHero = 0; compteurListeHero < heros.size(); compteurListeHero++) {
-                    TimeUnit.SECONDS.sleep(3);
+                    userDelay();
                     System.out.println(" Que va faire " + goodOne.getName() + "?");
                     goodOne.sayAction();
-                    TimeUnit.SECONDS.sleep(3);
                     action(goodOne, badOne,heros);
-                    TimeUnit.SECONDS.sleep(3);
- //TEST                   ((Hero) goodOne).changeWeapon(new Weapon("Da cut","cool cut",8));
+                    userDelay();
+ //TEST                   ((Hero) goodOne).changeWeapon(new Weapon("Epée","rare",8));
                     if (idHero == heros.size() - 1) {
                         idHero = 0;
                     } else {
@@ -121,9 +124,9 @@ public class Game {
                         System.out.println("Les Héros ont vaincu " + badOne.getName() + " !");
                         break;
                     }
-                    TimeUnit.SECONDS.sleep(3);
+                    userDelay();
                     displayStatus(heros, enemies);
-                    TimeUnit.SECONDS.sleep(5);
+                    userDelay();
 
                 }
 
@@ -139,10 +142,10 @@ public class Game {
                 Random randomTarget = new Random();
                 int int_target = randomTarget.nextInt(heros.size());
                 Combattant target = heros.get(int_target);
-                TimeUnit.SECONDS.sleep(4);
+                userDelay();
                 System.out.println(badOne.getName() + " attaque " + target.getName());
                 badOne.fight(target);
-                TimeUnit.SECONDS.sleep(4);
+                userDelay();
                 displayStatus(heros,enemies);
 
                 //VERIFICATION MORT DE LA CIBLE
@@ -150,7 +153,7 @@ public class Game {
                     System.out.println(target.getName() + " est mort !");
                     heros.remove(int_target);
                     if (heros.size() == 0) {
-                        TimeUnit.SECONDS.sleep(4);
+                        userDelay();
                         System.out.println("Malgré leur courage, les Héros ont tous été vaincu par les monstres menaçant la paix. \n" +
                                 "Plus rien désormais ne peut sauver l'humanité \n" +
                                 "GAME OVER");
@@ -246,6 +249,12 @@ public class Game {
         }
     }
 
+    private static void userDelay() {
+        System.out.println("v       PRESS ENTER TO SKIP");
+        Scanner scan = new Scanner(System.in);
+        String delay = scan.nextLine();
+    }
+
     private static void finProtection(List<Combattant> h) {
         for (Combattant c: h) {
             c.isProtected = false;
@@ -271,7 +280,7 @@ public class Game {
                         ((Hunter) goodOne).rechargeFleche(n);                   //Rajout de n flèche si le héro
                                                                                 // est un Hunter
                     }
-
+    System.out.println("\033[0;31m" + "RED COLORED" + "\033[0m" + " NORMAL");   Changement de couleur du txt
      */
 }
 

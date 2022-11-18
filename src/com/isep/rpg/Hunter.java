@@ -59,7 +59,7 @@ public class Hunter extends Hero{
             degatTotal = getDegat() + ((Weapon) item).getDamagePoints();
             currentWeaponList.add(weapon);
         } else {
-            System.out.println("Oups ! " + item.getName() + " ne convient pas aux Warrior !");
+            System.out.println("Oups ! " + item.getName() + " ne convient pas aux Hunter !");
         }
     }
 

@@ -1,5 +1,6 @@
 package com.isep.rpg;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Healer extends SpellCaster{
@@ -45,6 +46,9 @@ public class Healer extends SpellCaster{
     public void take(Item item) {
         if (item instanceof Weapon) {
             weapon = (Weapon) item;
+            System.out.println(getName() + " se voit confier l'arme " + item.getName() + " (+" + ((Weapon) item).getDamagePoints() + " dégats)");
+            degatTotal = getDegat() + ((Weapon) item).getDamagePoints();
+            currentWeaponList.add(weapon);
         } else {
             System.out.println("Oups ! " + item.getName() + " ne convient pas aux Healer !");
         }
@@ -54,8 +58,11 @@ public class Healer extends SpellCaster{
     public void changeWeapon(Weapon item) {
 
     }
+
+    ArrayList<Weapon> currentWeaponList = new ArrayList<>();
+    public int degatTotal = degat;
     private Weapon weapon;
     public int mana = (getDegat()+ getHealthPoint()*3);
     int heal = -20;
-    public int coutSoin = 100;
+    public int coutSoin = 25;
 }

@@ -1,5 +1,9 @@
 package com.isep.rpg;
 
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
+
 public class Mage extends SpellCaster{
 
     public Mage(String n, int h, int d, boolean def) {super(n, h, d, def);}
@@ -43,6 +47,9 @@ public class Mage extends SpellCaster{
     public void take(Item item) {
         if (item instanceof Weapon) {
             weapon = (Weapon) item;
+            System.out.println(getName() + " se voit confier l'arme " + item.getName() + " (+" + ((Weapon) item).getDamagePoints() + " dégats)");
+            degatTotal = getDegat() + ((Weapon) item).getDamagePoints();
+            currentWeaponList.add(weapon);
         } else {
             System.out.println("Oups ! " + item.getName() + " ne convient pas aux Mage !");
         }
@@ -50,10 +57,28 @@ public class Mage extends SpellCaster{
 
     @Override
     public void changeWeapon(Weapon item) {
-
+        System.out.println(getName() + " récupère " + item.getName()+ " (+" + ((Weapon) item).getDamagePoints() + " dégats)");
+        if (currentWeaponList.size() == 0) {
+            take(item);
+        } else {
+            Weapon currentWeapon = currentWeaponList.get(0);
+            System.out.println("Mais " + getName() + " possède déjà " + currentWeapon.getName() + " (+" + currentWeapon.getDamagePoints() + " dégats)" );
+            System.out.println("Souhaitez-vous changer l'équipement de " + getName() + " ? [y/n]");
+            Scanner scanChoixWeapon = new Scanner(System.in);
+            String choixWeapon = scanChoixWeapon.nextLine();
+            if (Objects.equals(choixWeapon, "y")) {
+                take(item);
+            } else if (Objects.equals(choixWeapon, "n")) {
+                System.out.println(getName() + " laisse " + item.getName());
+            }else{
+                changeWeapon(item);
+            }
+        }
     }
 
+    ArrayList<Weapon> currentWeaponList = new ArrayList<>();
+    public int degatTotal = degat;
     private Weapon weapon;
-    int coutSort = 100;
+    int coutSort = 25;
     int mana = (getDegat()+ getHealthPoint()*3);
 }

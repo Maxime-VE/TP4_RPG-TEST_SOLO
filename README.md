@@ -6,9 +6,9 @@
     -->Fonction changement d'arme -> retrouver les dégats d'origine -------------- (Fait)
                  Liste d'armes utilisables ->WeaponList.txt -> Implémentation
                  [Utilisation sur catégorie de héro]
-1) Implémentation du mana   -----------------------------------------------------(Fait)
+1) Implémentation du mana   -------------------------------------------------------(Fait)
 2) [Implémentation des consommables potion/nourriture.] 
-3) SKIP TXT METHOD ---------------------------------------------------------------(Fait)
+3) SKIP TXT METHOD ----------------------------------------------------------------(Fait)
 4) Loot de fin de manche
 5) Bénédiction de début de partie
 6) upgrade de fin de manche

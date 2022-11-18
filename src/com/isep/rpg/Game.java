@@ -88,6 +88,11 @@ public class Game {
         String nomEnnemy = nommageDragon();
         Dragon d = new Dragon(nomEnnemy, 20, 7, false);
         enemies.add(d);
+
+        nomEnnemy = nommageDragon();
+        Goblin g = new Goblin(nomEnnemy, 20, 7, false);
+        enemies.add(d);
+
         //##########################################################################################################
         // FIN INITIALISATION & DEBUT DE LA PARTIE
         //##########################################################################################################
@@ -124,7 +129,6 @@ public class Game {
                         System.out.println("Les Héros ont vaincu " + badOne.getName() + " !");
                         break;
                     }
-                    userDelay();
                     displayStatus(heros, enemies);
                     userDelay();
 

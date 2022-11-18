@@ -24,8 +24,8 @@ public class Mage extends SpellCaster{
 
     @Override
     public void fight(Combattant combattant) {
-        System.out.println(getName() + " lance une attaque !"); //@TODO Indiquer les dégat totaux reçus (getDegat + arme)
-        combattant.loose(getDegat());
+        System.out.println(getName() + " lance une attaque !");
+        combattant.loose(getDegat());   //@TODO Indiquer les dégat totaux reçus (getDegat + arme)
     }
     public void sayAction() {
         System.out.println("1- Attaque \n" +

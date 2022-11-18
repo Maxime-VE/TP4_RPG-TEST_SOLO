@@ -1,0 +1,7 @@
+Event + Action
+
+Malus:
+
+"Météore" + Tout les Allié -30% Pv
+"Pleine Lune" + Au prochain tour, Enemy +20% ATK
+""

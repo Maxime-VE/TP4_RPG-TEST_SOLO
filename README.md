@@ -7,9 +7,8 @@
                  Liste d'armes utilisables ->WeaponList.txt -> Implémentation
                  [Utilisation sur catégorie de héro]
 1) Implémentation du mana   -----------------------------------------------------(Fait)
-    --> Pareil que pour les flèches
 2) [Implémentation des consommables potion/nourriture.] 
-3) [SKIP TXT METHOD]
+3) SKIP TXT METHOD ---------------------------------------------------------------(Fait)
 4) Loot de fin de manche
 5) Bénédiction de début de partie
 6) upgrade de fin de manche

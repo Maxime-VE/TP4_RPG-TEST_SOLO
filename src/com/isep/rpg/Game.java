@@ -58,7 +58,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Mage : ");
                     Scanner scan3 = new Scanner(System.in);
                     String nom_Hero3 = scan3.nextLine();
-                    Mage m = new Mage(nom_Hero3, 13, 4, false);
+                    Mage m = new Mage(nom_Hero3, 13, 4, false, 40);
                     m.take( new Weapon("Baguette d'apprenti","commun", 1) );
                     heros.add(m);
                     break;
@@ -67,7 +67,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Healer : ");
                     Scanner scan4 = new Scanner(System.in);
                     String nom_Hero4 = scan4.nextLine();
-                    Healer h = new Healer(nom_Hero4, 14, 3, false);
+                    Healer h = new Healer(nom_Hero4, 14, 3, false, 50);
                     h.take( new Weapon("Bracelet de renforcement","commun", 1) );
                     heros.add(h);
                     break;
@@ -94,6 +94,11 @@ public class Game {
         enemies.add(d);
 
         //##########################################################################################################
+        // MISE EN PLACE DES CONSOMMABLES
+        //##########################################################################################################
+        Potion p = new Potion("Stock de potions", "plein");
+
+        //##########################################################################################################
         // FIN INITIALISATION & DEBUT DE LA PARTIE
         //##########################################################################################################
 
@@ -114,8 +119,7 @@ public class Game {
                 for (int compteurListeHero = 0; compteurListeHero < heros.size(); compteurListeHero++) {
                     userDelay();
                     System.out.println(" Que va faire " + goodOne.getName() + "?");
-                    goodOne.sayAction();
-                    action(goodOne, badOne,heros);
+                    action(goodOne, badOne,heros, p);
                     userDelay();
  //TEST                   ((Hero) goodOne).changeWeapon(new Weapon("Epée","rare",8));
                     if (idHero == heros.size() - 1) {
@@ -195,19 +199,25 @@ public class Game {
         System.out.println("#########################");
         System.out.println("Allies");
         for (Combattant c: h) {
-            System.out.println(c.getName() + " : " + c.getHealthPoint() + " PV ");
+            if (c instanceof SpellCaster) {
+                System.out.println(c.getName() + " : " + c.getHealthPoint() + " PV  " + ((SpellCaster) c).getMana() + "Mana" );
+            }else {
+                System.out.println(c.getName() + " : " + c.getHealthPoint() + " PV ");
+            }
+
         }
         System.out.println();
-        for (Combattant c: e) {
-            System.out.println("Enemy");
-            System.out.println(c.getName() + " : " + c.getHealthPoint() + " PV ");
-        }
+        Combattant c = e.get(0);
+        System.out.println("Enemy");
+        System.out.println(c.getName() + " : " + c.getHealthPoint() + " PV ");
+
         System.out.println("#########################");
     }
 
-    private static void action(Combattant c, Combattant combattant,List<Combattant> h) {
+    private static void action(Combattant c, Combattant combattant,List<Combattant> h, Potion potion) {
         Scanner scanAction = new Scanner(System.in);
         for (int compteurAction = 0 ; compteurAction < 1 ; compteurAction++) {
+            c.sayAction();
             while (!scanAction.hasNextInt()) {
                 scanAction.nextLine(); //clear the invalid input before prompting again
                 System.out.println("Veuillez sélectionner le numéro de l'action souhaitée :  ");
@@ -242,7 +252,124 @@ public class Game {
                     break;
 
                 case 4:
-                    System.out.println("En cours d'implémentation");
+
+                    Scanner scanObjet = new Scanner(System.in);
+                    for (int compteurObjet = 0 ; compteurObjet < 1 ; compteurObjet++) {
+
+                        System.out.println("Quel objet souhaitez-vous consommer ? \n" +
+                                "0- Retour \n" +
+                                "Nourriture : \n" +
+                                "XXXXXXXXX \n" +
+                                "Potion : (Uniquement pour des utilisateurs de sort : Mage & Healer) \n" +
+                                "2- Mini Potion : +" + potion.puissanceMiniPotion + "Mana (" + potion.compteurMiniPotion +" en stock)\n" +
+                                "3- Potion : +" + potion.puissancePotion + "Mana (" + potion.compteurPotion +" en stock) \n" +
+                                "4- Maxi Potion : +" + potion.puissanceMaxiPotion + "Mana (" + potion.compteurMaxiPotion + " en stock)");
+
+                        while (!scanObjet.hasNextInt()) {
+                            scanObjet.nextLine(); //clear the invalid input before prompting again
+                            System.out.println("Veuillez sélectionner le numéro de l'objet souhaité :  ");
+                        }
+                        int typeObjet = scanObjet.nextInt();
+                        switch (typeObjet) {
+
+                            case 1:
+                                System.out.println("En cours");
+                                compteurObjet--;
+                                break;
+
+                            case 2:
+                                if(potion.compteurMiniPotion > 0) {
+                                    System.out.println("Sur qui est-ce que " + c.getName() + " souhaite utiliser l'objet Mini Potion ?");
+                                    int compteurid = 1;
+                                    ArrayList<Combattant> ciblePotion = new ArrayList<>();
+                                    for(Combattant ally :h) {
+                                        if (ally instanceof SpellCaster) {
+                                            ciblePotion.add(ally);
+                                            System.out.println(compteurid + "- " + ally.getName() + " : " + ((SpellCaster) ally).getMana() + " Mana");
+                                            compteurid++;
+                                        }
+                                    }
+                                    if (ciblePotion.size() == 0 ) {
+                                        System.out.println("Aucun héro ne peut recevoir de potion !");
+                                        compteurObjet--;
+                                        break;
+                                    } else{
+                                        Scanner choixPotion = new Scanner(System.in);
+                                        int idPotion = choixPotion.nextInt();
+                                        potion.useMiniPotion((SpellCaster) ciblePotion.get((idPotion-1)));
+                                        break;
+                                    }
+
+                                } else {
+                                    System.out.println("Vous n'avez plus de Mini Potion");
+                                    compteurObjet--;
+                                }
+
+                            case 3:
+                                if(potion.compteurPotion > 0) {
+                                    System.out.println("Sur qui est-ce que " + c.getName() + " souhaite utiliser l'objet Potion ?");
+                                    int compteurid = 1;
+                                    ArrayList<Combattant> ciblePotion = new ArrayList<>();
+                                    for(Combattant ally :h) {
+                                        if (ally instanceof SpellCaster) {
+                                            ciblePotion.add(ally);
+                                            System.out.println(compteurid + "- " + ally.getName() + " : " + ((SpellCaster) ally).getMana() + " Mana");
+                                            compteurid++;
+                                        }
+                                    }
+                                    if (ciblePotion.size() == 0 ) {
+                                        System.out.println("Aucun héro ne peut recevoir de potion !");
+                                        compteurObjet--;
+                                        break;
+                                    } else{
+                                        Scanner choixPotion = new Scanner(System.in);
+                                        int idPotion = choixPotion.nextInt();
+                                        potion.usePotion((SpellCaster) ciblePotion.get((idPotion-1)));
+                                        break;
+                                    }
+
+                                } else {
+                                    System.out.println("Vous n'avez plus de Potion");
+                                    compteurObjet--;
+                                }
+
+                            case 4:
+                                if(potion.compteurMaxiPotion > 0) {
+                                    System.out.println("Sur qui est-ce que " + c.getName() + " souhaite utiliser l'objet Maxi Potion ?");
+                                    int compteurid = 1;
+                                    ArrayList<Combattant> ciblePotion = new ArrayList<>();
+                                    for(Combattant ally :h) {
+                                        if (ally instanceof SpellCaster) {
+                                            ciblePotion.add(ally);
+                                            System.out.println(compteurid + "- " + ally.getName() + " : " + ((SpellCaster) ally).getMana() + " Mana");
+                                            compteurid++;
+                                        }
+                                    }
+                                    if (ciblePotion.size() == 0 ) {
+                                        System.out.println("Aucun héro ne peut recevoir de potion !");
+                                        compteurObjet--;
+                                        break;
+                                    } else{
+                                        Scanner choixPotion = new Scanner(System.in);
+                                        int idPotion = choixPotion.nextInt();
+                                        potion.useMaxiPotion((SpellCaster) ciblePotion.get((idPotion-1)));
+                                        break;
+                                    }
+
+                                } else {
+                                    System.out.println("Vous n'avez plus de Maxi Potion");
+                                    compteurObjet--;
+                                }
+
+                            case 0:
+                                compteurAction--;
+                                break;
+                            default:
+                                compteurObjet--;
+                                break;
+                        }
+                    }
+
                     break;
 
                 default:
@@ -287,4 +414,4 @@ public class Game {
     System.out.println("\033[0;31m" + "RED COLORED" + "\033[0m" + " NORMAL");   Changement de couleur du txt
      */
 }
-
+//TODO Java = CamelCase

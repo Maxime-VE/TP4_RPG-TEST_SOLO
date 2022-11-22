@@ -6,17 +6,17 @@ import java.util.Scanner;
 
 public class Mage extends SpellCaster{
 
-    public Mage(String n, int h, int d, boolean def) {super(n, h, d, def);}
+    public Mage(String n, int h, int d, boolean def, int m) {super(n, h, d, def,m);}
 
     public void special(Combattant combattant) {
-        if (mana < coutSort){
+        if (getMana() < coutSort){
             System.out.println(getName() + " n'a plus assez de mana, " + getName() + " médite pendant ce tour et reçoit +5 Mana");
-            mana += 5;
+            setMana(5);
         }else{
             System.out.println(getName() + " lance un sort !");
             combattant.loose(getDegat()*2);
-            mana -= coutSort;
-            System.out.println("Il reste " + mana + " Mana à " + getName());
+            setMana(-coutSort);
+            System.out.println("Il reste " + getMana() + " Mana à " + getName());
         }
 
 
@@ -32,7 +32,7 @@ public class Mage extends SpellCaster{
                 "2- Sortilège (coûte " + coutSort +  " Mana) \n" +
                 "3- Protection \n" +
                 "4- Objet\n" +
-                "Mana actuel : " + mana);
+                "Mana actuel : " + getMana());
     }
 
 
@@ -80,5 +80,4 @@ public class Mage extends SpellCaster{
     public int degatTotal = degat;
     private Weapon weapon;
     int coutSort = 25;
-    int mana = (getDegat()+ getHealthPoint()*3);
 }

@@ -1,23 +1,21 @@
 package com.isep.rpg;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Healer extends SpellCaster{
-    public Healer(String n, int h, int d, boolean def) {super(n, h, d, def);}
+    public Healer(String n, int h, int d, boolean def, int m) {super(n, h, d, def, m);}
 
 
     public void special(Combattant combattant) {
-        if (mana < coutSoin){
+        if (getMana() < coutSoin){
             System.out.println(getName() + " n'a plus assez de mana, " + getName() + " médite pendant ce tour et reçoit +5 Mana");
-            mana += 5;
+            setMana(5);
         }else{
             System.out.println(combattant.getName() + " reçoit +" + Math.abs(heal) + "PV");
             combattant.loose(heal);
-            mana -= coutSoin;
-            System.out.println("Il reste " + mana + " Mana à " + getName());
+            setMana(-coutSoin);
+            System.out.println("Il reste " + getMana() + " Mana à " + getName());
         }
-
     }
 
 
@@ -62,7 +60,6 @@ public class Healer extends SpellCaster{
     ArrayList<Weapon> currentWeaponList = new ArrayList<>();
     public int degatTotal = degat;
     private Weapon weapon;
-    public int mana = (getDegat()+ getHealthPoint()*3);
     int heal = -20;
     public int coutSoin = 25;
 }

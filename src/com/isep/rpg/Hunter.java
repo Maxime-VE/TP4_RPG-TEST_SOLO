@@ -13,11 +13,11 @@ public class Hunter extends Hero{
 
 
     public void special(Combattant combattant) {
-        if (compteur_fleche != 0) {
+        if (compteurFleche != 0) {
             System.out.println(getName() + " tire une flèche !");
             combattant.loose(degatTotal*2);
-            compteur_fleche -= 1;
-            System.out.println("Il reste " + compteur_fleche + " flèches à " + getName());
+            compteurFleche -= 1;
+            System.out.println("Il reste " + compteurFleche + " flèches à " + getName());
         }
         else {
             System.out.println(getName() + " n'a plus de flèche... \n" +
@@ -27,7 +27,7 @@ public class Hunter extends Hero{
     }
 
     public void rechargeFleche(int recharge) {
-        compteur_fleche += recharge;
+        compteurFleche += recharge;
         System.out.println(getName() + " reçoit " + recharge + " flèches ! ");
     }
 
@@ -41,7 +41,7 @@ public class Hunter extends Hero{
                 "2- Tir à l'arc (Consomme 1 flèche) \n" +
                 "3- Protection \n" +
                 "4- Objet \n" +
-                "Nombre de flèche(s) actuelle(s) : " + compteur_fleche);
+                "Nombre de flèche(s) actuelle(s) : " + compteurFleche);
     }
 
     public void protection() {
@@ -86,5 +86,5 @@ public class Hunter extends Hero{
     ArrayList<Weapon> currentWeaponList = new ArrayList<>();
     int degatTotal = degat;
     private Weapon weapon;
-    int compteur_fleche = 1;
+    int compteurFleche = 1;
 }

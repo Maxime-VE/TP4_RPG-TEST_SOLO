@@ -1,6 +1,8 @@
 package com.isep.rpg;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Healer extends SpellCaster{
     public Healer(String n, int h, int d, boolean def, int m) {super(n, h, d, def, m);}
@@ -22,7 +24,7 @@ public class Healer extends SpellCaster{
     @Override
     public void fight(Combattant combattant) {
         System.out.println(getName() + " lance une attaque !");
-        combattant.loose(getDegat());
+        combattant.loose(degatTotal);
     }
 
     public void sayAction() {
@@ -54,7 +56,23 @@ public class Healer extends SpellCaster{
 
     @Override
     public void changeWeapon(Weapon item) {
-
+        System.out.println(getName() + " récupère " + item.getName()+ " (+" + ((Weapon) item).getDamagePoints() + " dégats)");
+        if (currentWeaponList.size()== 0) {
+            take(item);
+        } else {
+            Weapon currentWeapon = currentWeaponList.get(0);
+            System.out.println("Mais " + getName() + " possède déjà " + currentWeapon.getName() + " (+" + currentWeapon.getDamagePoints() + " dégats)" );
+            System.out.println("Souhaitez-vous changer l'équipement de " + getName() + " ? [y/n]");
+            Scanner scanChoixWeapon = new Scanner(System.in);
+            String choixWeapon = scanChoixWeapon.nextLine();
+            if (Objects.equals(choixWeapon, "y")) {
+                take(item);
+            } else if (Objects.equals(choixWeapon, "n")) {
+                System.out.println(getName() + " laisse " + item.getName());
+            }else{
+                changeWeapon(item);
+            }
+        }
     }
 
     ArrayList<Weapon> currentWeaponList = new ArrayList<>();

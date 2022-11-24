@@ -97,6 +97,7 @@ public class Game {
         // MISE EN PLACE DES CONSOMMABLES
         //##########################################################################################################
         Potion p = new Potion("Stock de potions", "plein");
+        Food f = new Food("Stock de nourriture" , "plein");
 
         //##########################################################################################################
         // FIN INITIALISATION & DEBUT DE LA PARTIE
@@ -107,7 +108,7 @@ public class Game {
         int idHero = 0;
         int idEnemy = 0;
         for (int manche = 0; manche < enemies.size(); manche++) {    // Compteur de manche
-            displayStatus(heros,enemies);
+            displayStatus(heros,enemies,manche);
             userDelay();
 
             //ATTAQUE DES HEROS
@@ -119,7 +120,7 @@ public class Game {
                 for (int compteurListeHero = 0; compteurListeHero < heros.size(); compteurListeHero++) {
                     userDelay();
                     System.out.println(" Que va faire " + goodOne.getName() + "?");
-                    action(goodOne, badOne,heros, p);
+                    action(goodOne, badOne,heros, p, f);
                     userDelay();
  //TEST                   ((Hero) goodOne).changeWeapon(new Weapon("Epée","rare",8));
                     if (idHero == heros.size() - 1) {
@@ -133,7 +134,7 @@ public class Game {
                         System.out.println("Les Héros ont vaincu " + badOne.getName() + " !");
                         break;
                     }
-                    displayStatus(heros, enemies);
+                    displayStatus(heros, enemies,manche);
                     userDelay();
 
                 }
@@ -154,7 +155,7 @@ public class Game {
                 System.out.println(badOne.getName() + " attaque " + target.getName());
                 badOne.fight(target);
                 userDelay();
-                displayStatus(heros,enemies);
+                displayStatus(heros,enemies,manche);
 
                 //VERIFICATION MORT DE LA CIBLE
                 if (target.getHealthPoint() <= 0) {
@@ -195,7 +196,7 @@ public class Game {
     }
 
 
-    public static void displayStatus(List<Combattant> h, List<Combattant> e) {
+    public static void displayStatus(List<Combattant> h, List<Combattant> e, int manche) {
         System.out.println("#########################");
         System.out.println("Allies");
         for (Combattant c: h) {
@@ -207,14 +208,14 @@ public class Game {
 
         }
         System.out.println();
-        Combattant c = e.get(0);
+        Combattant c = e.get(manche);
         System.out.println("Enemy");
         System.out.println(c.getName() + " : " + c.getHealthPoint() + " PV ");
 
         System.out.println("#########################");
     }
 
-    private static void action(Combattant c, Combattant combattant,List<Combattant> h, Potion potion) {
+    private static void action(Combattant c, Combattant combattant,List<Combattant> h, Potion potion, Food food) {
         Scanner scanAction = new Scanner(System.in);
         for (int compteurAction = 0 ; compteurAction < 1 ; compteurAction++) {
             c.sayAction();
@@ -259,11 +260,13 @@ public class Game {
                         System.out.println("Quel objet souhaitez-vous consommer ? \n" +
                                 "0- Retour \n" +
                                 "Nourriture : \n" +
-                                "XXXXXXXXX \n" +
+                                "1- Nuka-Cola : + " + food.puissanceNukaCola + " PV (" + food.compteurNukaCola + " en stock) \n" +
+                                "2- Bento : + " + food.puissanceBento + " PV (" + food.compteurBento + " en stock) \n" +
+                                "3- Ragoût : + " + food.puissanceRagout + " PV (" + food.compteurRagout + " en stock) \n" +
                                 "Potion : (Uniquement pour des utilisateurs de sort : Mage & Healer) \n" +
-                                "2- Mini Potion : +" + potion.puissanceMiniPotion + "Mana (" + potion.compteurMiniPotion +" en stock)\n" +
-                                "3- Potion : +" + potion.puissancePotion + "Mana (" + potion.compteurPotion +" en stock) \n" +
-                                "4- Maxi Potion : +" + potion.puissanceMaxiPotion + "Mana (" + potion.compteurMaxiPotion + " en stock)");
+                                "4- Mini Potion : +" + potion.puissanceMiniPotion + "Mana (" + potion.compteurMiniPotion +" en stock)\n" +
+                                "5- Potion : +" + potion.puissancePotion + "Mana (" + potion.compteurPotion +" en stock) \n" +
+                                "6- Maxi Potion : +" + potion.puissanceMaxiPotion + "Mana (" + potion.compteurMaxiPotion + " en stock)");
 
                         while (!scanObjet.hasNextInt()) {
                             scanObjet.nextLine(); //clear the invalid input before prompting again
@@ -273,11 +276,66 @@ public class Game {
                         switch (typeObjet) {
 
                             case 1:
-                                System.out.println("En cours");
-                                compteurObjet--;
-                                break;
+                                if(food.compteurNukaCola > 0) {
+                                    System.out.println("Sur qui est-ce que " + c.getName() + " souhaite utiliser l'objet Nuka-Cola ?");
+                                    int compteurid = 1;
+                                    ArrayList<Combattant> cibleFood = new ArrayList<>();
+                                    for(Combattant ally :h) {
+                                        cibleFood.add(ally);
+                                        System.out.println(compteurid + "- " + ally.getName() + " : " + ally.getHealthPoint() + " PV");
+                                        compteurid++;
+                                    }
+                                    Scanner choixFood = new Scanner(System.in);
+                                    int idFood = choixFood.nextInt();
+                                    food.useNukaCola(cibleFood.get((idFood-1)));
+                                    break;
+                                } else {
+                                    System.out.println("Vous n'avez plus de Nuka-Cola");
+                                    compteurObjet--;
+                                    break;
+                                }
 
                             case 2:
+                                if(food.compteurBento > 0) {
+                                    System.out.println("Sur qui est-ce que " + c.getName() + " souhaite utiliser l'objet Bento ?");
+                                    int compteurid = 1;
+                                    ArrayList<Combattant> cibleFood = new ArrayList<>();
+                                    for(Combattant ally :h) {
+                                        cibleFood.add(ally);
+                                        System.out.println(compteurid + "- " + ally.getName() + " : " + ally.getHealthPoint() + " PV");
+                                        compteurid++;
+                                    }
+                                    Scanner choixFood = new Scanner(System.in);
+                                    int idFood = choixFood.nextInt();
+                                    food.useBento(cibleFood.get((idFood-1)));
+                                    break;
+                                } else {
+                                    System.out.println("Vous n'avez plus de Bento");
+                                    compteurObjet--;
+                                    break;
+                                }
+
+                            case 3:
+                                if(food.compteurRagout > 0) {
+                                    System.out.println("Sur qui est-ce que " + c.getName() + " souhaite utiliser l'objet Ragoût ?");
+                                    int compteurid = 1;
+                                    ArrayList<Combattant> cibleFood = new ArrayList<>();
+                                    for(Combattant ally :h) {
+                                        cibleFood.add(ally);
+                                        System.out.println(compteurid + "- " + ally.getName() + " : " + ally.getHealthPoint() + " PV");
+                                        compteurid++;
+                                    }
+                                    Scanner choixFood = new Scanner(System.in);
+                                    int idFood = choixFood.nextInt();
+                                    food.useRagout(cibleFood.get((idFood-1)));
+                                    break;
+                                } else {
+                                    System.out.println("Vous n'avez plus de Ragoût");
+                                    compteurObjet--;
+                                    break;
+                                }
+
+                            case 4:
                                 if(potion.compteurMiniPotion > 0) {
                                     System.out.println("Sur qui est-ce que " + c.getName() + " souhaite utiliser l'objet Mini Potion ?");
                                     int compteurid = 1;
@@ -303,9 +361,10 @@ public class Game {
                                 } else {
                                     System.out.println("Vous n'avez plus de Mini Potion");
                                     compteurObjet--;
+                                    break;
                                 }
 
-                            case 3:
+                            case 5:
                                 if(potion.compteurPotion > 0) {
                                     System.out.println("Sur qui est-ce que " + c.getName() + " souhaite utiliser l'objet Potion ?");
                                     int compteurid = 1;
@@ -331,9 +390,10 @@ public class Game {
                                 } else {
                                     System.out.println("Vous n'avez plus de Potion");
                                     compteurObjet--;
+                                    break;
                                 }
 
-                            case 4:
+                            case 6:
                                 if(potion.compteurMaxiPotion > 0) {
                                     System.out.println("Sur qui est-ce que " + c.getName() + " souhaite utiliser l'objet Maxi Potion ?");
                                     int compteurid = 1;
@@ -359,6 +419,7 @@ public class Game {
                                 } else {
                                     System.out.println("Vous n'avez plus de Maxi Potion");
                                     compteurObjet--;
+                                    break;
                                 }
 
                             case 0:

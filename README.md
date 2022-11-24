@@ -2,21 +2,14 @@
 
 ## A faire:
 
-0) Implémentation des armes 
-                 Liste d'armes utilisables ->WeaponList.txt -> Implémentation
-                 [Utilisation sur catégorie de héro]
 
-1) [Implémentation des consommables potion/nourriture.]
-
-2) Interface graphique
-
-3) Loot de fin de manche
-
-4) Bénédiction de début de partie
-
-5) upgrade de fin de manche
-
-6) Event ?
+0)  [Interface graphique]
+1) Implémentation des armes 
+   Liste d'armes utilisables ->WeaponList.txt -> Implémentation
+   [Utilisation sur catégorie de héro]
+2) Loot/Upgrade de fin de manche
+3) Bénédiction de début de partie
+4) Event ?
 
 
 
@@ -29,3 +22,4 @@
 5) Implémentation des armes
 6) Mana
 7) Méthode skip txt
+8)  Implémentation des consommables potion/nourriture.

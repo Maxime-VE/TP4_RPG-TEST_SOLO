@@ -61,14 +61,21 @@ import java.util.*;
     }*/
     public class TEST {
         public static void main(String[] args) {
-            //System.out.println("");
-            ArrayList<String> l = new ArrayList<>();
+            Slime s = new Slime("blavbla", 4,2,false, "Slime");
+            System.out.println(s.getClass());
+
+
+
+
+
+
+            /*ArrayList<String> l = new ArrayList<>();
             l.add("me");
             l.add("you");
             l.add("us");
             for (String c : l) {
                 System.out.println(c);
-            }
+            }*/
 
 
 

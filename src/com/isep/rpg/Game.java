@@ -40,7 +40,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Warrior : ");
                     Scanner scan1 = new Scanner(System.in);
                     String nom_Hero1 = scan1.nextLine();
-                    Warrior w = new Warrior(nom_Hero1, 11, 6, false);
+                    Warrior w = new Warrior(nom_Hero1, 16, 30, false);
                     w.take( new Weapon("Couteau","commun", 1) );
                     heros.add(w);
                     break;
@@ -83,15 +83,20 @@ public class Game {
         // INITIALISATION VILAINS
         //##########################################################################################################
 
-        ArrayList<Combattant> enemies = new ArrayList<>();
+        ArrayList<Ennemy> enemies = new ArrayList<>();
 
-        String nomEnnemy = nommageDragon();
-        Dragon d = new Dragon(nomEnnemy, 20, 7, false);
+        String nomEnnemy = nommageEnemy(nomSlime);
+        Slime s = new Slime(nomEnnemy + ", Le roi Slime", 20, 7, false, "Slime");
+        enemies.add(s);
+
+        nomEnnemy = nommageEnemy(nomGoblin);
+        Goblin g = new Goblin(nomEnnemy, 20, 7, false, "Goblin");
+        enemies.add(g);
+
+        nomEnnemy = nommageEnemy(nomDragon);
+        Dragon d = new Dragon(nomEnnemy, 20, 7, false, "Dragon");
         enemies.add(d);
 
-        nomEnnemy = nommageDragon();
-        Goblin g = new Goblin(nomEnnemy, 20, 7, false);
-        enemies.add(d);
 
         //##########################################################################################################
         // MISE EN PLACE DES CONSOMMABLES
@@ -107,7 +112,11 @@ public class Game {
         userDelay();
         int idHero = 0;
         int idEnemy = 0;
-        for (int manche = 0; manche < enemies.size(); manche++) {    // Compteur de manche
+        int manche = 0;
+        while (enemies.size() != 0) {
+            manche +=1; // Compteur de manche
+            System.out.println("C'est le début de la manche n°" + (manche+1) + " et vous allez affronter " + enemies.get(idEnemy).getName());
+            System.out.println("Il s'agit d'un " + enemies.get(idEnemy).getType());
             displayStatus(heros,enemies,manche);
             userDelay();
 
@@ -120,7 +129,7 @@ public class Game {
                 for (int compteurListeHero = 0; compteurListeHero < heros.size(); compteurListeHero++) {
                     userDelay();
                     System.out.println(" Que va faire " + goodOne.getName() + "?");
-                    action(goodOne, badOne,heros, p, f);
+                    action(goodOne, (Ennemy) badOne,heros, p, f);
                     userDelay();
  //TEST                   ((Hero) goodOne).changeWeapon(new Weapon("Epée","rare",8));
                     if (idHero == heros.size() - 1) {
@@ -142,11 +151,13 @@ public class Game {
                 //VERIFICATION MORT DU VILAIN
                 if (badOne.getHealthPoint() <= 0) {
                     System.out.println("Les Héros ont vaincu " + badOne.getName() + " !");
+                    idHero = 0;
+                    userDelay();
                     break;
                 }
                 //ATTAQUE ENNEMIE
 
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(1);
                 System.out.println("C' est au tour des vilains d'attaquer ");
                 Random randomTarget = new Random();
                 int int_target = randomTarget.nextInt(heros.size());
@@ -166,6 +177,7 @@ public class Game {
                         System.out.println("Malgré leur courage, les Héros ont tous été vaincu par les monstres menaçant la paix. \n" +
                                 "Plus rien désormais ne peut sauver l'humanité \n" +
                                 "GAME OVER");
+
                         System.exit(0);
                     }
                 }
@@ -174,29 +186,21 @@ public class Game {
             enemies.remove(0);
 
         }
-
         System.out.println("Félicitation jeune aventurier, tu as vaincu l'ensemble de tes ennemies et sauvé l'humanité ! \n" +
                 "Tu es digne de devenir chevalier de notre royaume !");
-
-
     }
 
 
 
-    private static String nommageDragon() {
-        String nomDragon[] = {"Voinit, le Rédempteur",
-                "Ziepeo, le Brillant",
-                "Freghoar, Cœur de Feu",
-                "Dyghug, le Mort",
-                "Eimrei, Protecteur de la Montagne",
-                "Zudreonth, le Tenace"};
-        Random randomNomDragon = new Random();
-        int int_random = randomNomDragon.nextInt(nomDragon.length);
-        return nomDragon[int_random];
+    private static String nommageEnemy(String [] list) {
+        Random randomNomEnemy = new Random();
+        int int_random = randomNomEnemy.nextInt(list.length);
+        return list[int_random];
     }
 
 
-    public static void displayStatus(List<Combattant> h, List<Combattant> e, int manche) {
+
+    public static void displayStatus(List<Combattant> h, List<Ennemy> e, int manche) {
         System.out.println("#########################");
         System.out.println("Allies");
         for (Combattant c: h) {
@@ -208,14 +212,14 @@ public class Game {
 
         }
         System.out.println();
-        Combattant c = e.get(manche);
+        Combattant c = e.get(0);
         System.out.println("Enemy");
         System.out.println(c.getName() + " : " + c.getHealthPoint() + " PV ");
 
         System.out.println("#########################");
     }
 
-    private static void action(Combattant c, Combattant combattant,List<Combattant> h, Potion potion, Food food) {
+    private static void action(Combattant c, Ennemy combattant,List<Combattant> h, Potion potion, Food food) {
         Scanner scanAction = new Scanner(System.in);
         for (int compteurAction = 0 ; compteurAction < 1 ; compteurAction++) {
             c.sayAction();
@@ -462,6 +466,26 @@ public class Game {
 
     List<List<Weapon>> WeaponList = new ArrayList<List<Weapon>>();
 
+    static String[] nomDragon = {"Voinit, le Rédempteur",
+            "Ziepeo, le Brillant",
+            "Freghoar, Cœur de Feu",
+            "Dyghug, le Mort",
+            "Eimrei, Protecteur de la Montagne",
+            "Zudreonth, le Tenace"};
+
+    static String[] nomSlime = {"Lime",
+            "Gumball",
+            "Bounce",
+            "Driblet",
+            "Split",
+            "Blobby"};
+
+    static String[] nomGoblin = {"Crocstal",
+            "Minnug",
+            "Ruinrak",
+            "Dotraug",
+            "Gazazak",
+            "Ardnok"};
 
 
     /*

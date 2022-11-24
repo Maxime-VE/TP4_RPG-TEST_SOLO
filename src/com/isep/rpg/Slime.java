@@ -3,12 +3,12 @@ package com.isep.rpg;
 
 import static java.lang.StrictMath.abs;
 
-public class Dragon extends Ennemy{
-    public Dragon(String n, int h, int d, boolean def, String t) {
+public class Slime extends Ennemy{
+    public Slime(String n, int h, int d, boolean def, String t) {
 
         super(n, h, d, def, t);
-
     }
+
 
     @Override
     public void fight(Combattant combattant) {
@@ -32,9 +32,6 @@ public class Dragon extends Ennemy{
     }
 
     @Override
-    public void protection() {
-
-    }
-
+    public void protection() {}
 
 }

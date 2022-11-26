@@ -4,10 +4,16 @@
 
 
 0)  [Interface graphique]
+
 1) Implémentation des armes 
    Liste d'armes utilisables ->WeaponList.txt -> Implémentation
    [Utilisation sur catégorie de héro]
 2) Loot/Upgrade de fin de manche
+3) Nombre d'ennemi proportionnel au nombre de héro
+4) Point d'armure
+
+
+### Bonus
 3) Bénédiction de début de partie
 4) Event ?
 
@@ -21,5 +27,7 @@
 4) Mort des personnages (ne reviennent pas à la vie)
 5) Implémentation des armes
 6) Mana
-7) Méthode skip txt
-8)  Implémentation des consommables potion/nourriture.
+7) Méthode skip txt 
+8) Implémentation des consommables potion/nourriture.
+9) Nombre de Héros max au départ cap à 6
+10) Ordre attaque Héro/Ennemy aléatoire

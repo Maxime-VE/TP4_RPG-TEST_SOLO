@@ -1,9 +1,9 @@
 package com.isep.rpg;
 
 public class Goblin extends Ennemy{
-    public Goblin(String n, int h, int d, boolean def, String t) {
+    public Goblin(String n, int h, int d, boolean def, int r, String t) {
 
-        super(n, h, d, def, t);
+        super(n, h, d, def, r, t);
     }
 
     @Override

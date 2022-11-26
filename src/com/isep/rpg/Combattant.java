@@ -2,15 +2,19 @@ package com.isep.rpg;
 
 public abstract class Combattant {
 
-    public Combattant(String n, int h, int d, boolean def) {
+    public Combattant(String n, int h, int d, boolean def, int r) {
         name = n;
         healthPoint = h;
         degat = d;
         isProtected = def;
+        resistance = r ;
 
 
     }
 
+
+    public int getResistance() {return resistance;}
+    public void addResistance(int r) { resistance += r;   }
     public String getName() {
         return name;
     }
@@ -32,11 +36,9 @@ public abstract class Combattant {
 
 
 
-
-
     private String name;
     private int healthPoint;
     public int degat;
-
+    private int resistance;
     public boolean isProtected;
 }

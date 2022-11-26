@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Mage extends SpellCaster{
 
-    public Mage(String n, int h, int d, boolean def, int m) {super(n, h, d, def,m);}
+    public Mage(String n, int h, int d, boolean def,int r, int m) {super(n, h, d, def, r, m);}
 
     public void special(Combattant combattant) {
         if (getMana() < coutSort){

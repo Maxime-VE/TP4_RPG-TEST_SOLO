@@ -4,9 +4,9 @@ package com.isep.rpg;
 import static java.lang.StrictMath.abs;
 
 public class Slime extends Ennemy{
-    public Slime(String n, int h, int d, boolean def, String t) {
+    public Slime(String n, int h, int d, boolean def, int r, String t) {
 
-        super(n, h, d, def, t);
+        super(n, h, d, def, r, t);
     }
 
 

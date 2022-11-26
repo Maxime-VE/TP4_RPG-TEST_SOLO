@@ -2,9 +2,9 @@ package com.isep.rpg;
 
 public abstract class SpellCaster extends Hero {
 
-    public SpellCaster(String n, int h, int d, boolean def, int m) {
+    public SpellCaster(String n, int h, int d, boolean def, int r, int m) {
 
-        super(n, h, d, def);
+        super(n, h, d, def, r);
         mana = m;
     }
     public int mana;

@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Hunter extends Hero{
 
-    public Hunter(String n, int h, int d, boolean def) {
-        super(n, h, d, def);
+    public Hunter(String n, int h, int d, boolean def, int r) {
+        super(n, h, d, def, r);
     }
 
 

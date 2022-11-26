@@ -4,9 +4,9 @@ package com.isep.rpg;
 import static java.lang.StrictMath.abs;
 
 public class Dragon extends Ennemy{
-    public Dragon(String n, int h, int d, boolean def, String t) {
+    public Dragon(String n, int h, int d, boolean def, int r, String t) {
 
-        super(n, h, d, def, t);
+        super(n, h, d, def, r, t);
 
     }
 

@@ -61,13 +61,29 @@ import java.util.*;
     }*/
     public class TEST {
         public static void main(String[] args) {
-            Slime s = new Slime("blavbla", 4,2,false, "Slime");
+
+
+
+
+
+            /*ArrayList<String> t = new ArrayList<>();
+            t.add("oui");
+            t.add("non");
+            t.add("jsp");
+            t.add("tkt");
+            t.add("mtn");
+            test(t);
+            for (String s : t) {
+                System.out.println(s);
+            }*/
+
+            /*Slime s = new Slime("blavbla", 4,2,false, "Slime");
             System.out.println(s.getClass());
-
-
-
-
-
+            Random random = new Random();
+            for (int i = 0; i< 20 ; i++){
+                int int_random = random.nextInt(2);
+                System.out.println(int_random);
+            }*/
 
             /*ArrayList<String> l = new ArrayList<>();
             l.add("me");
@@ -97,6 +113,9 @@ import java.util.*;
             }
             System.out.println("fini");*/
         }
+    public static void test(List<String> t) {
+            t.remove(4);
+    }
 
 
 }

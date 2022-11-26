@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Warrior extends Hero{
 
-    public Warrior(String n, int h, int d, boolean def) {
-        super(n, h, d, def);
+    public Warrior(String n, int h, int d, boolean def, int r) {
+        super(n, h, d, def, r);
     }
 
     @Override

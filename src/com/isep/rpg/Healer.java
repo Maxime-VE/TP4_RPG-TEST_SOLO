@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Healer extends SpellCaster{
-    public Healer(String n, int h, int d, boolean def, int m) {super(n, h, d, def, m);}
+    public Healer(String n, int h, int d, boolean def, int r, int m) {super(n, h, d, def, r, m);}
 
 
     public void special(Combattant combattant) {

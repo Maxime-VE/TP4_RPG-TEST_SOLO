@@ -4,9 +4,8 @@ public abstract class Hero extends Combattant{
     private String name;
     private int healthPoint;
 
-    public Hero(String n, int h, int d, boolean def) {
-        super(n, h, d, def);
-    }
+    public Hero(String n, int h, int d, boolean def, int r) {super(n, h, d, def, r);    }
+
 
     // Abstrait car n'importe quel hero peut prendre un objet mais son
     // utilisation dépend du type du héro (Epée -> Warrior  Baton -> Mage)

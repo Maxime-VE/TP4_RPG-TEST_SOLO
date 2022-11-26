@@ -44,7 +44,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Warrior : ");
                     Scanner scan1 = new Scanner(System.in);
                     String nom_Hero1 = scan1.nextLine();
-                    Warrior w = new Warrior(nom_Hero1, 16, 30, false, 5);
+                    Warrior w = new Warrior(nom_Hero1, 100, 8, false, 5);
                     w.take( new Weapon("Couteau","commun", 1) );
                     heros.add(w);
                     break;
@@ -91,15 +91,15 @@ public class Game {
 
 
         String nomEnnemy = nommageEnemy(nomSlime);
-        Slime s = new Slime(nomEnnemy + ", Le roi Slime", 20, 1, false, 0, "Slime");
+        Slime s = new Slime(nomEnnemy + ", Le roi Slime", 15, 10, false, 0, "Slime");
         enemies.add(s);
 
         nomEnnemy = nommageEnemy(nomGoblin);
-        Goblin g = new Goblin(nomEnnemy, 20, 7, false, 0, "Goblin");
+        Goblin g = new Goblin(nomEnnemy, 15, 13, false, 0, "Goblin");
         enemies.add(g);
 
         nomEnnemy = nommageEnemy(nomDragon);
-        Dragon d = new Dragon(nomEnnemy, 20, 7, false, 0, "Dragon");
+        Dragon d = new Dragon(nomEnnemy, 5, 20, false, 0, "Dragon");
         enemies.add(d);
 
 

@@ -29,6 +29,7 @@ public class Hunter extends Hero{
     public void rechargeFleche(int recharge) {
         compteurFleche += recharge;
         System.out.println(getName() + " reçoit " + recharge + " flèches ! ");
+        userDelay();
     }
 
     @Override
@@ -58,6 +59,7 @@ public class Hunter extends Hero{
             System.out.println(getName() + " se voit confier l'arme " + item.getName() + " (+" + ((Weapon) item).getDamagePoints() + " dégats)");
             degatTotal = getDegat() + ((Weapon) item).getDamagePoints();
             currentWeaponList.add(weapon);
+            userDelay();
         } else {
             System.out.println("Oups ! " + item.getName() + " ne convient pas aux Hunter !");
         }
@@ -78,13 +80,22 @@ public class Hunter extends Hero{
                 take(item);
             } else if (Objects.equals(choixWeapon, "n")) {
                 System.out.println(getName() + " laisse " + item.getName());
+                userDelay();
             }else{
                 changeWeapon(item);
             }
         }
     }
+
+    private static void userDelay() {
+        System.out.println("\n" +
+                "v       PRESS ENTER TO SKIP");
+        Scanner scan = new Scanner(System.in);
+        String delay = scan.nextLine();
+    }
+
     ArrayList<Weapon> currentWeaponList = new ArrayList<>();
-    int degatTotal = degat;
+    public int degatTotal = degat;
     private Weapon weapon;
     int compteurFleche = 1;
 }

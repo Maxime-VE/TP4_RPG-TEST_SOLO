@@ -41,6 +41,7 @@ public class Warrior extends Hero{
             System.out.println(getName() + " se voit confier l'arme " + item.getName() + " (+" + ((Weapon) item).getDamagePoints() + " dégats)");
             degatTotal = getDegat() + ((Weapon) item).getDamagePoints();
             currentWeaponList.add(weapon);
+            userDelay();
         } else {
             System.out.println("Oups ! " + item.getName() + " ne convient pas aux Warrior !");
         }
@@ -57,15 +58,23 @@ public class Warrior extends Hero{
             System.out.println("Souhaitez-vous changer l'équipement de " + getName() + " ? [y/n]");
             Scanner scanChoixWeapon = new Scanner(System.in);
             String choixWeapon = scanChoixWeapon.nextLine();
-            if (Objects.equals(choixWeapon, "y")) {
+            if (Objects.equals(choixWeapon, "y")) {         //@TODO le choix de changement d'arme ne prend pas en compte une arme modifiée
                 take(item);
             } else if (Objects.equals(choixWeapon, "n")) {
                 System.out.println(getName() + " laisse " + item.getName());
+                userDelay();
             }else{
                 changeWeapon(item);
             }
         }
     }
+    private static void userDelay() {
+        System.out.println("\n" +
+                "v       PRESS ENTER TO SKIP");
+        Scanner scan = new Scanner(System.in);
+        String delay = scan.nextLine();
+    }
+
     ArrayList<Weapon> currentWeaponList = new ArrayList<>();
     public int degatTotal = degat;
     private Weapon weapon;

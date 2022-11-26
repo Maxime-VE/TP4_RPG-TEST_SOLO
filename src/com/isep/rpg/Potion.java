@@ -1,5 +1,7 @@
 package com.isep.rpg;
 
+import java.util.Scanner;
+
 public class Potion extends Consumable {
     public Potion(String name, String etat) {
         super(name, etat);
@@ -15,6 +17,28 @@ public class Potion extends Consumable {
     public int puissanceMiniPotion = 10;
 
 
+
+    public void rechargeMiniPotion(int p) {
+        if (p == 0 ){
+            return;
+        }
+        compteurMiniPotion += p ;
+        System.out.println("Vous récupérez " + p + " Mini Potion ! ");
+        userDelay();}
+    public void rechargeMaxiPotion(int p) {
+        if (p == 0 ){
+            return;
+        }
+        compteurMaxiPotion += p ;
+        System.out.println("Vous récupérez " + p + " Maxi Potion ! ");
+        userDelay();}
+    public void rechargePotion(int p) {
+        if (p == 0 ){
+            return;
+        }
+        compteurPotion += p ;
+        System.out.println("Vous récupérez " + p + " Potion ! ");
+        userDelay();}
 
 
     public void usePotion(SpellCaster combattant) {
@@ -33,5 +57,12 @@ public class Potion extends Consumable {
         System.out.println(combattant.getName() + " utilise une maxi Potion +30 Mana et récupère du mana");
         compteurMaxiPotion -=1;
         combattant.setMana(puissanceMaxiPotion);
+    }
+
+    private static void userDelay() {
+        System.out.println("\n" +
+                "v       PRESS ENTER TO SKIP");
+        Scanner scan = new Scanner(System.in);
+        String delay = scan.nextLine();
     }
 }

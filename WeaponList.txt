@@ -5,7 +5,7 @@ Warrior: Commun: "Couteau","Lance","Epée","Machette","Dague","Hache","Epée lon
 
 
 Hunter: Commun:"Arc court","Arc long","Arbalète"
-        Rare:"Arc amélioré","Arc perforant
+        Rare:"Arc amélioré","Arc perforant"
         Epique:"Arc ensorcelé","Arbalète ensorcelée"
         Légendaire:"Arc d'Ulysse","Arc d'Artémis"
 

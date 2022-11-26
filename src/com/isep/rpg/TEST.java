@@ -63,7 +63,15 @@ import java.util.*;
         public static void main(String[] args) {
 
 
-
+            Random random = new Random();
+            for (int i = 0; i< 10 ; i++) {
+                int int_random = random.nextInt( 4);
+                System.out.println(int_random);
+            }
+            for (int i = 0; i< 10 ; i++) {
+                int int_random = random.nextInt(6, 7);
+                System.out.println(int_random);
+            }
 
 
             /*ArrayList<String> t = new ArrayList<>();
@@ -79,10 +87,7 @@ import java.util.*;
 
             /*Slime s = new Slime("blavbla", 4,2,false, "Slime");
             System.out.println(s.getClass());
-            Random random = new Random();
-            for (int i = 0; i< 20 ; i++){
-                int int_random = random.nextInt(2);
-                System.out.println(int_random);
+
             }*/
 
             /*ArrayList<String> l = new ArrayList<>();
@@ -113,9 +118,9 @@ import java.util.*;
             }
             System.out.println("fini");*/
         }
-    public static void test(List<String> t) {
+    /*public static void test(List<String> t) {
             t.remove(4);
     }
+*/}
 
 
-}

@@ -43,17 +43,17 @@ public class Food extends Consumable {
     public void useBento(Combattant combattant) {
         System.out.println(combattant.getName() + " utilise un Bento +" + puissanceBento + " PV et récupère de la vie");
         compteurBento -=1;
-        combattant.loose(-puissanceBento);
+        combattant.loose(-(puissanceBento+combattant.soinBonus));
     }
     public void useNukaCola(Combattant combattant) {
         System.out.println(combattant.getName() + " utilise un NukaCola +" + puissanceNukaCola + " PV et récupère de la vie");
         compteurNukaCola -=1;
-        combattant.loose(-puissanceNukaCola);
+        combattant.loose(-(puissanceNukaCola+combattant.soinBonus));
     }
     public void useRagout(Combattant combattant) {
         System.out.println(combattant.getName() + " utilise un Ragoût +" + puissanceRagout + " PV et récupère de la vie");
         compteurRagout -=1;
-        combattant.loose(-puissanceRagout);
+        combattant.loose(-(puissanceRagout+combattant.soinBonus));
     }
 
     private static void userDelay() {

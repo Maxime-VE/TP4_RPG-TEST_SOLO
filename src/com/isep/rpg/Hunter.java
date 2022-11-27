@@ -15,7 +15,9 @@ public class Hunter extends Hero{
     public void special(Combattant combattant) {
         if (compteurFleche != 0) {
             System.out.println(getName() + " tire une flèche !");
-            combattant.loose(degatTotal*2);
+            int attack = (int) ((degatTotal*1.6)+degatSpecial);
+            System.out.println(getName() + " inflige " + attack + " points de dégât à " + combattant.getName());
+            combattant.loose(attack);
             compteurFleche -= 1;
             System.out.println("Il reste " + compteurFleche + " flèches à " + getName());
         }
@@ -35,6 +37,7 @@ public class Hunter extends Hero{
     @Override
     public void fight(Combattant combattant) {
         System.out.println(getName() + " lance une attaque !");
+        System.out.println(getName() + " inflige " + degatTotal + " points de dégât à " + combattant.getName());
         combattant.loose(degatTotal);
     }
     public void sayAction() {
@@ -45,6 +48,42 @@ public class Hunter extends Hero{
                 "Nombre de flèche(s) actuelle(s) : " + compteurFleche);
     }
 
+    @Override
+    public void actualStatus() {
+        System.out.println(getName() + " : " + getHealthPoint() + " PV  ,  " + degatTotal + " ATK  ,  " + getResistance() + " DEF");
+    }
+    public void sayUpgrade() {
+        System.out.println("Veuillez choisir la récompense de " + getName());
+        userDelay();
+        actualStatus();
+        System.out.println("""
+                1- Amélioration des dégats\s
+                2- Amélioration de l'efficacité de l'attaque spéciale\s
+                3- Amélioration de la défense\s
+                4- Amélioration de l'éfficacité des objets""");
+        Scanner scanChoix = new Scanner(System.in);
+        int choix = scanChoix.nextInt();
+        switch (choix) {
+            case 1:
+                degat += 3;
+                degatTotal = degat + currentWeaponList.get(0).getDamagePoints();
+                System.out.println(getName() + " se sent plus fort !");
+                break;
+            case 2:
+                degatSpecial += 3;
+                System.out.println(getName() + " maîtrise mieux son attaque spéciale !");
+                break;
+            case 3:
+                addResistance(2);
+                System.out.println(getName() + " se sent plus résistant !");
+                break;
+            case 4:
+                soinBonus += 2;
+                System.out.println(getName() + " est plus réceptif aux effets des objets !");
+                break;
+        }
+
+    }
     public void protection() {
         System.out.println(getName() + " se protège !");
         isProtected = true;
@@ -77,6 +116,7 @@ public class Hunter extends Hero{
             Scanner scanChoixWeapon = new Scanner(System.in);
             String choixWeapon = scanChoixWeapon.nextLine();
             if (Objects.equals(choixWeapon, "y")) {
+                currentWeaponList.remove(0);
                 take(item);
             } else if (Objects.equals(choixWeapon, "n")) {
                 System.out.println(getName() + " laisse " + item.getName());
@@ -97,5 +137,7 @@ public class Hunter extends Hero{
     ArrayList<Weapon> currentWeaponList = new ArrayList<>();
     public int degatTotal = degat;
     private Weapon weapon;
+    public int degatSpecial = 0;
     int compteurFleche = 1;
+    public int soinBonus = 0;
 }

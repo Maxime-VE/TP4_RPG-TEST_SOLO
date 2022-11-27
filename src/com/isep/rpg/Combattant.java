@@ -24,6 +24,7 @@ public abstract class Combattant {
     public int getDegat() {
         return degat;
     }
+    public void setDegat(int d) { degat+=d;   }
     public boolean getProtection() {return isProtected;}
 
     public abstract void fight(Combattant combattant);
@@ -31,6 +32,8 @@ public abstract class Combattant {
         healthPoint -= hp;
     }
     public abstract void sayAction();
+    public abstract void sayUpgrade();
+    public abstract void actualStatus();
     public abstract void special(Combattant combattant);
     public abstract void protection();
 
@@ -41,4 +44,6 @@ public abstract class Combattant {
     public int degat;
     private int resistance;
     public boolean isProtected;
+    public int soinBonus;
+    public int degatTotal;
 }

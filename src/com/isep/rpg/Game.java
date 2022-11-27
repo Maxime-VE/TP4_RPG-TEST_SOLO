@@ -41,7 +41,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Warrior : ");
                     Scanner scan1 = new Scanner(System.in);
                     String nom_Hero1 = scan1.nextLine();
-                    Warrior w = new Warrior(nom_Hero1, 100, 20, false, 5);
+                    Warrior w = new Warrior(nom_Hero1, 37, 4, false, 5);
                     w.take( new Weapon("Couteau","commun", 1) );
                     heros.add(w);
                     break;
@@ -50,7 +50,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Hunter : ");
                     Scanner scan2 = new Scanner(System.in);
                     String nom_Hero2 = scan2.nextLine();
-                    Hunter hu = new Hunter(nom_Hero2, 12, 5, false, 3);
+                    Hunter hu = new Hunter(nom_Hero2, 22, 4, false, 3);
                     hu.take( new Weapon("Arc","commun", 1) );
                     heros.add(hu);
                     break;
@@ -59,7 +59,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Mage : ");
                     Scanner scan3 = new Scanner(System.in);
                     String nom_Hero3 = scan3.nextLine();
-                    Mage m = new Mage(nom_Hero3, 13, 4, false, 3, 40);
+                    Mage m = new Mage(nom_Hero3, 16, 3, false, 3, 40);
                     m.take( new Weapon("Baguette d'apprenti","commun", 1) );
                     heros.add(m);
                     break;
@@ -68,7 +68,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Healer : ");
                     Scanner scan4 = new Scanner(System.in);
                     String nom_Hero4 = scan4.nextLine();
-                    Healer h = new Healer(nom_Hero4, 14, 3, false, 2, 50);
+                    Healer h = new Healer(nom_Hero4, 14, 2, false, 2, 50);
                     h.take( new Weapon("Bracelet de renforcement","commun", 1) );
                     heros.add(h);
                     break;
@@ -88,15 +88,15 @@ public class Game {
 
 
         String nomEnnemy = nommageEnnemy(nomSlime);
-        Slime s = new Slime(nomEnnemy + ", Le roi Slime", 15, 10, false, 0, "Slime");
+        Slime s = new Slime(nomEnnemy + ", Le roi Slime", 10, 2, false, 0, "Slime");
         enemies.add(s);
 
         nomEnnemy = nommageEnnemy(nomGoblin);
-        Goblin g = new Goblin(nomEnnemy, 15, 13, false, 0, "Goblin");
+        Goblin g = new Goblin(nomEnnemy, 15, 3, false, 0, "Goblin");
         enemies.add(g);
 
         nomEnnemy = nommageEnnemy(nomDragon);
-        Dragon d = new Dragon(nomEnnemy, 5, 20, false, 0, "Dragon");
+        Dragon d = new Dragon(nomEnnemy, 26, 20, false, 0, "Dragon");
         enemies.add(d);
 
 
@@ -122,6 +122,7 @@ public class Game {
             displayStatus(heros,enemies);
             userDelay();
             boolean firstTurn = false;
+            upgradeFinDeManche(heros);
 
             //ATTAQUE DES HEROS
             while(true) {
@@ -158,7 +159,6 @@ public class Game {
                         break;
                     }
                     displayStatus(heros, enemies);
-                    userDelay();
 
                 }
 
@@ -172,7 +172,7 @@ public class Game {
                     break;
                 }
                 //ATTAQUE ENNEMIE
-
+                userDelay();
                 attaqueEnnemie(heros, badOne);
                 displayStatus(heros,enemies);
                 finProtection(heros);  // Annule la protection de tous les héros protégés de la manche
@@ -180,6 +180,7 @@ public class Game {
 
             enemies.remove(0);
             recompenseFinDeManche(heros,manche,p,f,weaponList);
+            upgradeFinDeManche(heros);
 
         }
         System.out.println("Félicitation jeune aventurier, tu as vaincu l'ensemble de tes ennemies et sauvé l'humanité ! \n" +
@@ -227,12 +228,7 @@ public class Game {
                 "#########################");
         System.out.println("Allies");
         for (Combattant c: h) {
-            if (c instanceof SpellCaster) {
-                System.out.println(c.getName() + " : " + c.getHealthPoint() + " PV  ,  " + c.getDegat() + " ATK  ,  " + c.getResistance() + " DEF  ,  " + ((SpellCaster) c).getMana() + " Mana" );
-            }else {
-                System.out.println(c.getName() + " : " + c.getHealthPoint() + " PV  ,  " + c.getDegat() + " ATK  ,  " + c.getResistance() + " DEF");
-            }
-
+            c.actualStatus();
         }
         System.out.println();
         Combattant c = e.get(0);
@@ -258,18 +254,23 @@ public class Game {
         Random randomObjet = new Random();
 
         //INITIALISATION NOMBRE DE RECOMPENSE
-        int nombreWeapon = (int) ((h.size()+manche)/2);
+        int nombreWeapon;
+        if (h.size()> 3){
+            nombreWeapon = (int) ((h.size()+manche-3)/2);
+        }else {
+            nombreWeapon = (int) ((h.size()+manche-1)/2);
+        }
         int maxLvl3Consumable;
         int maxLvl2Consumable;
         int maxLvl1Consumable;
         if (manche <= 2) {
-            maxLvl3Consumable = 2;
+            maxLvl3Consumable = 1;
             maxLvl2Consumable = 3;
-            maxLvl1Consumable = 6;
+            maxLvl1Consumable = 4;
         } else {
-            maxLvl3Consumable = (int) ((h.size()+manche)/2);
-            maxLvl2Consumable = (int) ((h.size()+manche+2)/2);
-            maxLvl1Consumable = (int) ((h.size()+manche+8)/2);
+            maxLvl3Consumable = (int) ((h.size()+manche-2)/2);
+            maxLvl2Consumable = (int) ((h.size()+manche)/2);
+            maxLvl1Consumable = (int) ((h.size()+manche+2)/2);
         }
 
         //RECOMPENSE POTION
@@ -402,6 +403,13 @@ public class Game {
             }
     }
 
+    public static void upgradeFinDeManche(List<Combattant> h){
+        for (Combattant c : h){
+            c.sayUpgrade();
+            userDelay();
+        }
+    }
+
     private static void action(Combattant c, Ennemy combattant,List<Combattant> h, Potion potion, Food food) {
         Scanner scanAction = new Scanner(System.in);
         for (int compteurAction = 0 ; compteurAction < 1 ; compteurAction++) {
@@ -415,7 +423,6 @@ public class Game {
 
                 case 1:
                     c.fight(combattant);
-                    System.out.println(c.getName() + " inflige " + c.getDegat() + " points de dégât à " + combattant.getName()); // getDegat à modifier en degatTotal @TODO
                     break;
 
                 case 2:

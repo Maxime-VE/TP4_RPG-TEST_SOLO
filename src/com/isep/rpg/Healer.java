@@ -13,8 +13,9 @@ public class Healer extends SpellCaster{
             System.out.println(getName() + " n'a plus assez de mana, " + getName() + " médite pendant ce tour et reçoit +5 Mana");
             setMana(5);
         }else{
-            System.out.println(combattant.getName() + " reçoit +" + Math.abs(heal) + "PV");
-            combattant.loose(heal);
+            int soin = heal-degatSpecial;
+            System.out.println(combattant.getName() + " reçoit +" + Math.abs(soin) + "PV");
+            combattant.loose(soin);
             setMana(-coutSoin);
             System.out.println("Il reste " + getMana() + " Mana à " + getName());
         }
@@ -24,6 +25,7 @@ public class Healer extends SpellCaster{
     @Override
     public void fight(Combattant combattant) {
         System.out.println(getName() + " lance une attaque !");
+        System.out.println(getName() + " inflige " + degatTotal + " points de dégât à " + combattant.getName());
         combattant.loose(degatTotal);
     }
 
@@ -33,6 +35,47 @@ public class Healer extends SpellCaster{
                 "3- Protection \n" +
                 "4- Objet \n" +
                 "Mana actuel : " + mana);
+    }
+    @Override
+    public void actualStatus() {
+        System.out.println(getName() + " : " + getHealthPoint() + " PV  ,  " + degatTotal + " ATK  ,  " + getResistance() + " DEF  ,  " + getMana() + " Mana" );
+    }
+    public void sayUpgrade() {
+        System.out.println("Veuillez choisir la récompense de " + getName());
+        userDelay();
+        actualStatus();
+        System.out.println("""
+                1- Amélioration des dégats\s
+                2- Amélioration de l'efficacité de la capacité spéciale\s
+                3- Amélioration de la défense\s
+                4- Amélioration de l'éfficacité des objets\s
+                5- Réduction du coup en mana de la capacité spéciale""");
+        Scanner scanChoix = new Scanner(System.in);
+        int choix = scanChoix.nextInt();
+        switch (choix) {
+            case 1:
+                degat += 2;
+                degatTotal = degat + currentWeaponList.get(0).getDamagePoints();
+                System.out.println(getName() + " se sent plus fort !");
+                break;
+            case 2:
+                degatSpecial += 3;
+                System.out.println(getName() + " maîtrise mieux sa capacité spéciale !");
+                break;
+            case 3:
+                addResistance(2);
+                System.out.println(getName() + " se sent plus résistant !");
+                break;
+            case 4:
+                soinBonus += 2;
+                System.out.println(getName() + " est plus réceptif aux effets des objets !");
+                break;
+            case 5:
+                coutSoin -= 2;
+                System.out.println(getName() + " demande maintenant moins de mana pour effectuer \"Soin\" !");
+                break;
+        }
+
     }
 
     public void protection() {
@@ -67,6 +110,7 @@ public class Healer extends SpellCaster{
             Scanner scanChoixWeapon = new Scanner(System.in);
             String choixWeapon = scanChoixWeapon.nextLine();
             if (Objects.equals(choixWeapon, "y")) {
+                currentWeaponList.remove(0);
                 take(item);
             } else if (Objects.equals(choixWeapon, "n")) {
                 System.out.println(getName() + " laisse " + item.getName());
@@ -87,4 +131,6 @@ public class Healer extends SpellCaster{
     private Weapon weapon;
     int heal = -20;
     public int coutSoin = 25;
+    public int soinBonus = 0;
+    public int degatSpecial = 0;
 }

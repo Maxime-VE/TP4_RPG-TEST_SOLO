@@ -10,17 +10,23 @@ public class Goblin extends Ennemy{
     public void fight(Combattant combattant) {
         System.out.println(getName() + " lance une attaque !");
         int degatInfliges = (getDegat()-combattant.getResistance());
+        if (degatInfliges < 0) {
+            degatInfliges=0;
+        }
         if (combattant.getProtection()) {
             System.out.println(combattant.getName() + " est protégé !");
-            int attack = (int) degatInfliges / 2;
+            int attack = (int) (degatInfliges/1.6);
             combattant.loose(attack);
             System.out.println("Il inflige " + attack + " points de dégât");
         }else {
-            combattant.loose(getDegat());
+            combattant.loose(degatInfliges);
             System.out.println("Il inflige " + degatInfliges + " points de dégât");
         }
     }
     public void sayAction() {
+        System.out.print("");
+    }
+    public void sayUpgrade() {
         System.out.print("");
     }
     public void special(Combattant combattant) {
@@ -28,8 +34,8 @@ public class Goblin extends Ennemy{
     }
 
     @Override
-    public void protection() {
-
-    }
+    public void protection() {    }
+    @Override
+    public void actualStatus() {    }
 
 }

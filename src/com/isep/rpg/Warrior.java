@@ -2,6 +2,7 @@ package com.isep.rpg;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Warrior extends Hero{
@@ -13,13 +14,54 @@ public class Warrior extends Hero{
     @Override
     public void fight(Combattant combattant) {
         System.out.println(getName() + " lance une attaque !");
+        System.out.println(getName() + " inflige " + degatTotal + " points de dégât à " + combattant.getName());
         combattant.loose(degatTotal);
     }
     public void sayAction() {
-        System.out.println("1- Attaque \n" +
-                "2- Attaque Spéciale (Rage) \n" +
-                "3- Protection \n" +
-                "4- Objet");
+        System.out.println("""
+                1- Attaque\s
+                2- Attaque Spéciale (Chance d'infliger une attaque entre 0,5 et 1,5 fois plus forte que Attaque)\s
+                3- Protection\s
+                4- Objet""");
+    }
+
+
+    public void sayUpgrade() {
+        System.out.println("Veuillez choisir la récompense de " + getName());
+        userDelay();
+        actualStatus();
+        System.out.println("""
+                1- Amélioration des dégats\s
+                2- Amélioration de l'efficacité de l'attaque spéciale\s
+                3- Amélioration de la défense\s
+                4- Amélioration de l'éfficacité des objets""");
+        Scanner scanChoix = new Scanner(System.in);
+        int choix = scanChoix.nextInt();
+        switch (choix) {
+            case 1:
+                degat += 3;
+                degatTotal = degat + currentWeaponList.get(0).getDamagePoints();
+                System.out.println(getName() + " se sent plus fort !");
+                break;
+            case 2:
+                degatSpecial += 4;
+                System.out.println(getName() + " maîtrise mieux son attaque spéciale !");
+                break;
+            case 3:
+                addResistance(2);
+                System.out.println(getName() + " se sent plus résistant !");
+                break;
+            case 4:
+                soinBonus += 2;
+                System.out.println(getName() + " est plus réceptif aux effets des objets !");
+                break;
+        }
+
+    }
+
+    @Override
+    public void actualStatus() {
+        System.out.println(getName() + " : " + getHealthPoint() + " PV  ,  " + degatTotal + " ATK  ,  " + getResistance() + " DEF");
     }
 
     public void protection() {
@@ -28,8 +70,13 @@ public class Warrior extends Hero{
     }
 
     public void special(Combattant combattant) {
+        Random random = new Random();
+        float randomForce = random.nextFloat();
+        randomForce += 0.5;
         System.out.println(getName() + " lance une attaque spéciale !");
-        combattant.loose(degatTotal*2);
+        int attack = (int) ((degatTotal*randomForce)+degatSpecial);
+        System.out.println(getName() + " inflige " + attack + " points de dégât à " + combattant.getName());
+        combattant.loose(attack);
     }
 
     // Implémentation de la méthode abstraite "take" par le Warrior :
@@ -58,7 +105,8 @@ public class Warrior extends Hero{
             System.out.println("Souhaitez-vous changer l'équipement de " + getName() + " ? [y/n]");
             Scanner scanChoixWeapon = new Scanner(System.in);
             String choixWeapon = scanChoixWeapon.nextLine();
-            if (Objects.equals(choixWeapon, "y")) {         //@TODO le choix de changement d'arme ne prend pas en compte une arme modifiée
+            if (Objects.equals(choixWeapon, "y")) {
+                currentWeaponList.remove(0);                                                    //@TODO le choix de changement d'arme ne prend pas en compte une arme modifiée (Normalement c'est réglé)
                 take(item);
             } else if (Objects.equals(choixWeapon, "n")) {
                 System.out.println(getName() + " laisse " + item.getName());
@@ -77,6 +125,8 @@ public class Warrior extends Hero{
 
     ArrayList<Weapon> currentWeaponList = new ArrayList<>();
     public int degatTotal = degat;
+    public int degatSpecial = 0;
+    public int soinBonus = 0;
     private Weapon weapon;
 
 }

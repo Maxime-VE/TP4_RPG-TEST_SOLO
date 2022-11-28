@@ -52,7 +52,8 @@ public class Warrior extends Hero{
                 System.out.println(getName() + " se sent plus résistant !");
                 break;
             case 4:
-                soinBonus += 2;
+                bonusVie += 2;
+                soinBonus = bonusVie;
                 System.out.println(getName() + " est plus réceptif aux effets des objets !");
                 break;
         }
@@ -126,7 +127,6 @@ public class Warrior extends Hero{
     ArrayList<Weapon> currentWeaponList = new ArrayList<>();
     public int degatTotal = degat;
     public int degatSpecial = 0;
-    public int soinBonus = 0;
+    private int bonusVie = 0;
     private Weapon weapon;
-
 }

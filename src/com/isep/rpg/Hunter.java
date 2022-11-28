@@ -78,7 +78,8 @@ public class Hunter extends Hero{
                 System.out.println(getName() + " se sent plus résistant !");
                 break;
             case 4:
-                soinBonus += 2;
+                bonusVie += 2;
+                soinBonus = bonusVie;
                 System.out.println(getName() + " est plus réceptif aux effets des objets !");
                 break;
         }
@@ -139,5 +140,5 @@ public class Hunter extends Hero{
     private Weapon weapon;
     public int degatSpecial = 0;
     int compteurFleche = 1;
-    public int soinBonus = 0;
+    public int bonusVie = 0;
 }

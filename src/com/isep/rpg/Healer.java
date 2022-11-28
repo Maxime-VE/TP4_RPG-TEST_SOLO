@@ -71,7 +71,8 @@ public class Healer extends SpellCaster{
                 System.out.println(getName() + " est plus réceptif aux effets des objets !");
                 break;
             case 5:
-                coutSoin -= 2;
+                bonusVie += 2;
+                soinBonus = bonusVie;
                 System.out.println(getName() + " demande maintenant moins de mana pour effectuer \"Soin\" !");
                 break;
         }
@@ -131,6 +132,6 @@ public class Healer extends SpellCaster{
     private Weapon weapon;
     int heal = -20;
     public int coutSoin = 25;
-    public int soinBonus = 0;
+    public int bonusVie = 0;
     public int degatSpecial = 0;
 }

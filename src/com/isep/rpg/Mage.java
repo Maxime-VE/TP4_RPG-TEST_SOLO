@@ -73,7 +73,8 @@ public class Mage extends SpellCaster{
                 System.out.println(getName() + " est plus réceptif aux effets des objets !");
                 break;
             case 5:
-                coutSort -= 2;
+                bonusVie += 2;
+                soinBonus = bonusVie;
                 System.out.println(getName() + " demande maintenant moins de mana pour effectuer \"Sortilège\" !");
                 break;
         }
@@ -132,6 +133,6 @@ public class Mage extends SpellCaster{
     public int degatTotal = degat;
     private Weapon weapon;
     int coutSort = 25;
-    public int soinBonus = 0;
+    public int bonusVie = 0;
     public int degatSpecial = 0;
 }

@@ -122,7 +122,6 @@ public class Game {
             displayStatus(heros,enemies);
             userDelay();
             boolean firstTurn = false;
-            upgradeFinDeManche(heros);
 
             //ATTAQUE DES HEROS
             while(true) {
@@ -686,14 +685,16 @@ public class Game {
             "Freghoar, Cœur de Feu",
             "Dyghug, le Mort",
             "Eimrei, Protecteur de la Montagne",
-            "Zudreonth, le Tenace"};
+            "Zudreonth, le Tenace",
+            "Veldra Tempest"};
 
     static String[] nomSlime = {"Lime",
             "Gumball",
             "Bounce",
             "Driblet",
             "Split",
-            "Blobby"};
+            "Blobby",
+            "Limule"};
 
     static String[] nomGoblin = {"Crocstal",
             "Minnug",

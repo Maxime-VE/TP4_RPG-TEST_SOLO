@@ -107,7 +107,7 @@ public class Warrior extends Hero{
             Scanner scanChoixWeapon = new Scanner(System.in);
             String choixWeapon = scanChoixWeapon.nextLine();
             if (Objects.equals(choixWeapon, "y")) {
-                currentWeaponList.remove(0);                                                    //@TODO le choix de changement d'arme ne prend pas en compte une arme modifiée (Normalement c'est réglé)
+                currentWeaponList.remove(0);
                 take(item);
             } else if (Objects.equals(choixWeapon, "n")) {
                 System.out.println(getName() + " laisse " + item.getName());

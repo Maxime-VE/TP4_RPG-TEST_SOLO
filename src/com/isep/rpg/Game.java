@@ -26,10 +26,11 @@ public class Game {
         }
         for (int i = 0; i < nb_Hero; i++) {
             System.out.println(" Quel sera votre héro n°" + (i+1) + " ?");
-            //System.out.println("1- Warrior : Fort et courageux, ce combattant polyvalent allie une attaque et une défense modérée. \n" +
-            //        "2- Hunter : Un manieur d'arme à distance ayant une faible résistance aux dégats mais une attaque spéciale efficace.\n" +
-            //        "3- Mage : Un maître de sortilèges offensifs, caractérisé par ses puissantes attaques et sa faible défense. \n" +
-            //        "4- Healer : Expert en sort de régénération. Malgré son manque de point de vie, il possède une très solide protection en mode défense et la capacité de soigner ses compagnons.");
+            System.out.println("""
+                    1- Warrior : Fort et courageux, ce combattant polyvalent allie une attaque et une défense modérée.\s
+                    2- Hunter : Un manieur d'arme à distance ayant une faible résistance aux dégats mais une attaque spéciale efficace.
+                    3- Mage : Un maître de sortilèges offensifs, caractérisé par ses puissantes attaques et sa faible défense.\s
+                    4- Healer : Expert en sort de régénération. Malgré son manque de point de vie, il possède une très solide protection en mode défense et la capacité de soigner ses compagnons.""");
             while (!scanner.hasNextInt()) {
                 scanner.nextLine(); //clear the invalid input before prompting again
                 System.out.println("Veuillez sélectionner le numéro du héro souhaité :  ");
@@ -41,7 +42,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Warrior : ");
                     Scanner scan1 = new Scanner(System.in);
                     String nom_Hero1 = scan1.nextLine();
-                    Warrior w = new Warrior(nom_Hero1, 37, 4, false, 5);
+                    Warrior w = new Warrior("\033[0;32m"+nom_Hero1+"\033[0m", 37, 4, false, 5);
                     w.take( new Weapon("Couteau","commun", 1) );
                     heros.add(w);
                     break;
@@ -50,7 +51,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Hunter : ");
                     Scanner scan2 = new Scanner(System.in);
                     String nom_Hero2 = scan2.nextLine();
-                    Hunter hu = new Hunter(nom_Hero2, 22, 4, false, 3);
+                    Hunter hu = new Hunter("\033[0;32m"+nom_Hero2+"\033[0m", 22, 4, false, 3);
                     hu.take( new Weapon("Arc","commun", 1) );
                     heros.add(hu);
                     break;
@@ -59,7 +60,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Mage : ");
                     Scanner scan3 = new Scanner(System.in);
                     String nom_Hero3 = scan3.nextLine();
-                    Mage m = new Mage(nom_Hero3, 16, 3, false, 3, 40);
+                    Mage m = new Mage("\033[0;32m"+nom_Hero3+"\033[0m", 16, 3, false, 3, 40);
                     m.take( new Weapon("Baguette d'apprenti","commun", 1) );
                     heros.add(m);
                     break;
@@ -68,7 +69,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Healer : ");
                     Scanner scan4 = new Scanner(System.in);
                     String nom_Hero4 = scan4.nextLine();
-                    Healer h = new Healer(nom_Hero4, 14, 2, false, 2, 50);
+                    Healer h = new Healer("\033[0;32m"+nom_Hero4+"\033[0m", 14, 2, false, 2, 50);
                     h.take( new Weapon("Bracelet de renforcement","commun", 1) );
                     heros.add(h);
                     break;
@@ -88,15 +89,15 @@ public class Game {
 
 
         String nomEnnemy = nommageEnnemy(nomSlime);
-        Slime s = new Slime(nomEnnemy + ", Le roi Slime", 10, 2, false, 0, "Slime");
+        Slime s = new Slime("\033[0;31m"+nomEnnemy + ", Le roi Slime"+"\033[0m", 10, 2, false, 0, "Slime");
         enemies.add(s);
 
         nomEnnemy = nommageEnnemy(nomGoblin);
-        Goblin g = new Goblin(nomEnnemy, 15, 3, false, 0, "Goblin");
+        Goblin g = new Goblin("\033[0;31m"+nomEnnemy+"\033[0m", 15, 3, false, 0, "Goblin");
         enemies.add(g);
 
         nomEnnemy = nommageEnnemy(nomDragon);
-        Dragon d = new Dragon(nomEnnemy, 26, 20, false, 0, "Dragon");
+        Dragon d = new Dragon("\033[0;31m"+nomEnnemy+"\033[0m", 26, 20, false, 0, "Dragon");
         enemies.add(d);
 
 
@@ -145,7 +146,6 @@ public class Game {
                     System.out.println(" Que va faire " + goodOne.getName() + "?");
                     action(goodOne, badOne,heros, p, f);
                     userDelay();
- //TEST                   ((Hero) goodOne).changeWeapon(new Weapon("Epée","rare",8));
                     if (idHero == heros.size() - 1) {
                         idHero = 0;
                     } else {
@@ -336,19 +336,19 @@ public class Game {
         if (rareteWeapon <= 40) {
             weaponName = nommageWeapon(listWeapon[typeHero], 0);
             degatCommonWeapon = randomObjet.nextInt(4,8);
-            description = "Commun";
+            description = "\033[0;37m"+"Commun"+"\033[0m";
         } else if (rareteWeapon > 40 && rareteWeapon <= 70) {
             weaponName = nommageWeapon(listWeapon[typeHero], 1);
             degatCommonWeapon = randomObjet.nextInt(6, 10);
-            description = "Rare";
+            description = "\033[0;34m"+"Rare"+"\033[0m";
         } else if (rareteWeapon > 70  && rareteWeapon <= 90) {
             weaponName = nommageWeapon(listWeapon[typeHero], 2);
             degatCommonWeapon = randomObjet.nextInt(9, 13);
-            description = "Epique";
+            description = "\033[0;35m"+"Epique"+"\033[0m";
         } else {
             weaponName = nommageWeapon(listWeapon[typeHero], 3);
             degatCommonWeapon = randomObjet.nextInt(13, 19);
-            description = "Légendaire";
+            description = "\033[0;33m"+"Légendaire"+"\033[0m";
         }
         Weapon w = new Weapon(weaponName, description, degatCommonWeapon);
         System.out.println("Vous venez de trouver " + w.getName() + " +" + w.getDamagePoints() + " ATK ("+ w.getDescription()+ ") !" );
@@ -702,9 +702,6 @@ public class Game {
             "Dotraug",
             "Gazazak",
             "Ardnok"};
-
-    //BLOC NOMMAGE ARMES
-
 
 
 

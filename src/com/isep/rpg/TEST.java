@@ -63,7 +63,7 @@ import java.util.*;
         public static void main(String[] args) {
 
 
-            Random random = new Random();
+            /*Random random = new Random();
             for (int i = 0; i< 10 ; i++) {
                 int int_random = random.nextInt( 4);
                 System.out.println(int_random);
@@ -71,7 +71,7 @@ import java.util.*;
             for (int i = 0; i< 10 ; i++) {
                 int int_random = random.nextInt(6, 7);
                 System.out.println(int_random);
-            }
+            }*/
 
 
             /*ArrayList<String> t = new ArrayList<>();

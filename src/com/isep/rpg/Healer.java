@@ -67,12 +67,12 @@ public class Healer extends SpellCaster{
                 System.out.println(getName() + " se sent plus résistant !");
                 break;
             case 4:
-                soinBonus += 2;
+                bonusVie += 2;
+                soinBonus = bonusVie;
                 System.out.println(getName() + " est plus réceptif aux effets des objets !");
                 break;
             case 5:
-                bonusVie += 2;
-                soinBonus = bonusVie;
+                coutSoin -= 2;
                 System.out.println(getName() + " demande maintenant moins de mana pour effectuer \"Soin\" !");
                 break;
         }

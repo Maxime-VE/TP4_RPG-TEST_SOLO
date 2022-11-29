@@ -42,8 +42,8 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Warrior : ");
                     Scanner scan1 = new Scanner(System.in);
                     String nom_Hero1 = scan1.nextLine();
-                    Warrior w = new Warrior("\033[0;32m"+nom_Hero1+"\033[0m", 37, 4, false, 5);
-                    w.take( new Weapon("Couteau","commun", 1) );
+                    Warrior w = new Warrior("\033[1;32m"+nom_Hero1+"\033[0m", 37, 10, false, 5);
+                    w.take( new Weapon("Couteau","Commun", 1) );
                     heros.add(w);
                     break;
 
@@ -51,8 +51,8 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Hunter : ");
                     Scanner scan2 = new Scanner(System.in);
                     String nom_Hero2 = scan2.nextLine();
-                    Hunter hu = new Hunter("\033[0;32m"+nom_Hero2+"\033[0m", 22, 4, false, 3);
-                    hu.take( new Weapon("Arc","commun", 1) );
+                    Hunter hu = new Hunter("\033[1;32m"+nom_Hero2+"\033[0m", 22, 5, false, 3);
+                    hu.take( new Weapon("Arc","Commun", 1) );
                     heros.add(hu);
                     break;
 
@@ -60,8 +60,8 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Mage : ");
                     Scanner scan3 = new Scanner(System.in);
                     String nom_Hero3 = scan3.nextLine();
-                    Mage m = new Mage("\033[0;32m"+nom_Hero3+"\033[0m", 16, 3, false, 3, 40);
-                    m.take( new Weapon("Baguette d'apprenti","commun", 1) );
+                    Mage m = new Mage("\033[1;32m"+nom_Hero3+"\033[0m", 16, 3, false, 3, 40);
+                    m.take( new Weapon("Baguette d'apprenti","Commun", 1) );
                     heros.add(m);
                     break;
 
@@ -69,8 +69,8 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Healer : ");
                     Scanner scan4 = new Scanner(System.in);
                     String nom_Hero4 = scan4.nextLine();
-                    Healer h = new Healer("\033[0;32m"+nom_Hero4+"\033[0m", 14, 2, false, 2, 50);
-                    h.take( new Weapon("Bracelet de renforcement","commun", 1) );
+                    Healer h = new Healer("\033[1;32m"+nom_Hero4+"\033[0m", 14, 2, false, 2, 50);
+                    h.take( new Weapon("Bracelet de renforcement","Commun", 1) );
                     heros.add(h);
                     break;
 
@@ -85,25 +85,44 @@ public class Game {
         // INITIALISATION VILAINS
         //##########################################################################################################
 
-        ArrayList<Ennemy> enemies = new ArrayList<>();
+        ArrayList<Ennemy> manche1 = new ArrayList<>();
+        ArrayList<Ennemy> manche2 = new ArrayList<>();
+        ArrayList<Ennemy> manche3 = new ArrayList<>();
+        ArrayList<Ennemy> manche4 = new ArrayList<>();
+        ArrayList<Ennemy> manche5 = new ArrayList<>();
+        ArrayList<ArrayList<Ennemy>> enemiesList = new ArrayList<>();
+        String nomEnnemy;
+
+        int nombreEnnemy = (int) ((heros.size()/2)+1);
+        for (int i=0; i<nombreEnnemy ; i++) {
+            nomEnnemy = nommageEnnemy(nomSlime);
+            Slime s = new Slime("\033[1;31m"+nomEnnemy + ", Le Slime"+"\033[0m", 10, 2, false, 0, "Slime");
+            manche1.add(s);
+        }
+        enemiesList.add(manche1);
+
+        nomEnnemy =nommageEnnemy(nomGolem);
+        Golem golem = new Golem("\033[1;31m"+nomEnnemy+"\033[0m", 15,3,false,0, "Golem");
+        manche2.add(golem);
+        enemiesList.add(manche2);
 
 
-        String nomEnnemy = nommageEnnemy(nomSlime);
-        Slime s = new Slime("\033[0;31m"+nomEnnemy + ", Le roi Slime"+"\033[0m", 10, 2, false, 0, "Slime");
-        enemies.add(s);
-
-        nomEnnemy = nommageEnnemy(nomGoblin);
-        Goblin g = new Goblin("\033[0;31m"+nomEnnemy+"\033[0m", 15, 3, false, 0, "Goblin");
-        enemies.add(g);
+        for (int i=0; i<nombreEnnemy ; i++) {
+            nomEnnemy = nommageEnnemy(nomGoblin);
+            Goblin g = new Goblin("\033[1;31m"+nomEnnemy+"\033[0m", 15, 3, false, 0, "Goblin");
+            manche3.add(g);
+        }
+        enemiesList.add(manche3);
 
         nomEnnemy = nommageEnnemy(nomDragon);
-        Dragon d = new Dragon("\033[0;31m"+nomEnnemy+"\033[0m", 26, 20, false, 0, "Dragon");
-        enemies.add(d);
-
+        Dragon d = new Dragon("\033[1;31m"+nomEnnemy+"\033[0m", 26, 20, false, 0, "Dragon");
+        manche4.add(d);
+        enemiesList.add(manche4);
 
         //##########################################################################################################
         // MISE EN PLACE DES CONSOMMABLES
         //##########################################################################################################
+
         Potion p = new Potion("Stock de potions", "plein");
         Food f = new Food("Stock de nourriture" , "plein");
 
@@ -113,13 +132,25 @@ public class Game {
 
         System.out.println(" Début de la partie ");
         userDelay();
+        ArrayList<Ennemy> enemies;
         int idHero = 0;
         int idEnemy = 0;
         int manche = 0;
-        while (enemies.size() != 0) {
+        while (enemiesList.size() != 0) {
+
+            enemies = enemiesList.get(0);
             manche +=1; // Compteur de manche
-            System.out.println("C'est le début de la manche n°" + manche + " et vous allez affronter " + enemies.get(idEnemy).getName());
-            System.out.println("Il s'agit d'un " + enemies.get(idEnemy).getType());
+            System.out.print("C'est le début de la manche n°" + manche + " et vous allez affronter ");
+            if (enemies.size()!=1){
+                for (Ennemy e : enemies){
+                    System.out.print(e.getName() + ", ");
+                }
+                System.out.println("");
+            }else {
+                System.out.println(enemies.get(idEnemy).getName());
+            }
+
+            System.out.println("Il s'agit d'un ennemi de type :  " + enemies.get(idEnemy).getType());
             displayStatus(heros,enemies);
             userDelay();
             boolean firstTurn = false;
@@ -134,17 +165,16 @@ public class Game {
                     Random random = new Random();
                     int int_random = random.nextInt(2);
                     if (int_random == 1) {
-                        attaqueEnnemie(heros, badOne);
+                        attaqueEnnemie(heros, enemies);
                         displayStatus(heros,enemies);
                     }
                     firstTurn = true;
                 }
-
                 System.out.println("C' est au tour des héros d'agir ");
                 for (int compteurListeHero = 0; compteurListeHero < heros.size(); compteurListeHero++) {
                     userDelay();
                     System.out.println(" Que va faire " + goodOne.getName() + "?");
-                    action(goodOne, badOne,heros, p, f);
+                    action(goodOne, enemies,heros, p, f);
                     userDelay();
                     if (idHero == heros.size() - 1) {
                         idHero = 0;
@@ -153,8 +183,10 @@ public class Game {
 
                     }
                     goodOne = heros.get(idHero);
-                    if (badOne.getHealthPoint() <= 0) {
-                        System.out.println("Les Héros ont vaincu " + badOne.getName() + " !");
+
+                    //@TODO FAIRE ICI VERIFICATION MORT VILAIN
+                    if (enemies.size() == 0) {
+                        System.out.println("Les Héros ont vaincu tous les monstres de la manche  !");
                         break;
                     }
                     displayStatus(heros, enemies);
@@ -162,22 +194,23 @@ public class Game {
                 }
 
                 //VERIFICATION MORT DU VILAIN
-                if (badOne.getHealthPoint() <= 0) {
-                    System.out.println("Les Héros ont vaincu " + badOne.getName() + " !");
+                if (enemies.size() == 0) {
                     idHero = 0;
-                    userDelay();
-                    System.out.println("Vous tombez sur un trésor caché proche du " + badOne.getType());
                     userDelay();
                     break;
                 }
                 //ATTAQUE ENNEMIE
                 userDelay();
-                attaqueEnnemie(heros, badOne);
+                attaqueEnnemie(heros, enemies);
                 displayStatus(heros,enemies);
                 finProtection(heros);  // Annule la protection de tous les héros protégés de la manche
             }
-
-            enemies.remove(0);
+            enemiesList.remove(0);
+            if (enemiesList.size() == 0 ){
+                break;
+            }
+            System.out.println("Vous tombez sur un trésor caché proche du lieu de votre précédent combat ");
+            userDelay();
             recompenseFinDeManche(heros,manche,p,f,weaponList);
             upgradeFinDeManche(heros);
 
@@ -200,26 +233,30 @@ public class Game {
         return list[i][int_random];
     }
 
-    public static void attaqueEnnemie(List<Combattant> h, Ennemy e) {
+    public static void attaqueEnnemie(List<Combattant> h, List<Ennemy> e) {
         System.out.println("C' est au tour des vilains d'attaquer ");
+        userDelay();
         Random randomTarget = new Random();
-        int int_target = randomTarget.nextInt(h.size());
-        Combattant target = h.get(int_target);
-        userDelay();
-        System.out.println(e.getName() + " attaque " + target.getName());
-        e.fight(target);
-        userDelay();
-        if (target.getHealthPoint() <= 0) {
-            System.out.println(target.getName() + " est mort !");
-            h.remove(int_target);
-            if (h.size() == 0) {
-                userDelay();
-                System.out.println("Malgré leur courage, les Héros ont tous été vaincu par les monstres menaçant la paix. \n" +
-                        "Plus rien désormais ne peut sauver l'humanité \n" +
-                        "GAME OVER");
-                System.exit(0);
+        int int_target;
+        for (Combattant c : e){
+            int_target = randomTarget.nextInt(h.size());
+            Combattant target = h.get(int_target);
+            System.out.println(c.getName() + " attaque " + target.getName());
+            c.fight(target);
+            userDelay();
+            if (target.getHealthPoint() <= 0) {
+                System.out.println(target.getName() + " est mort !");
+                h.remove(int_target);
+                if (h.size() == 0) {
+                    userDelay();
+                    System.out.println("Malgré leur courage, les Héros ont tous été vaincu par les monstres menaçant la paix. \n" +
+                            "Plus rien désormais ne peut sauver l'humanité \n" +
+                            "GAME OVER");
+                    System.exit(0);
+                }
             }
         }
+
     }
 
     public static void displayStatus(List<Combattant> h, List<Ennemy> e) {
@@ -230,9 +267,11 @@ public class Game {
             c.actualStatus();
         }
         System.out.println();
-        Combattant c = e.get(0);
         System.out.println("Ennemy");
-        System.out.println(c.getName() + " : " + c.getHealthPoint() + " PV ");
+        for (Combattant c: e) {
+            System.out.println(c.getName() + " : " + c.getHealthPoint() + " PV ");
+        }
+
 
         System.out.println("#########################");
     }
@@ -336,19 +375,19 @@ public class Game {
         if (rareteWeapon <= 40) {
             weaponName = nommageWeapon(listWeapon[typeHero], 0);
             degatCommonWeapon = randomObjet.nextInt(4,8);
-            description = "\033[0;37m"+"Commun"+"\033[0m";
+            description = "\033[1;37m"+"Commun"+"\033[0m";
         } else if (rareteWeapon > 40 && rareteWeapon <= 70) {
             weaponName = nommageWeapon(listWeapon[typeHero], 1);
             degatCommonWeapon = randomObjet.nextInt(6, 10);
-            description = "\033[0;34m"+"Rare"+"\033[0m";
+            description = "\033[1;34m"+"Rare"+"\033[0m";
         } else if (rareteWeapon > 70  && rareteWeapon <= 90) {
             weaponName = nommageWeapon(listWeapon[typeHero], 2);
             degatCommonWeapon = randomObjet.nextInt(9, 13);
-            description = "\033[0;35m"+"Epique"+"\033[0m";
+            description = "\033[1;35m"+"Epique"+"\033[0m";
         } else {
             weaponName = nommageWeapon(listWeapon[typeHero], 3);
             degatCommonWeapon = randomObjet.nextInt(13, 19);
-            description = "\033[0;33m"+"Légendaire"+"\033[0m";
+            description = "\033[1;33m"+"Légendaire"+"\033[0m";
         }
         Weapon w = new Weapon(weaponName, description, degatCommonWeapon);
         System.out.println("Vous venez de trouver " + w.getName() + " +" + w.getDamagePoints() + " ATK ("+ w.getDescription()+ ") !" );
@@ -409,7 +448,7 @@ public class Game {
         }
     }
 
-    private static void action(Combattant c, Ennemy combattant,List<Combattant> h, Potion potion, Food food) {
+    private static void action(Combattant c, List<Ennemy> e,List<Combattant> h, Potion potion, Food food) {
         Scanner scanAction = new Scanner(System.in);
         for (int compteurAction = 0 ; compteurAction < 1 ; compteurAction++) {
             c.sayAction();
@@ -421,7 +460,21 @@ public class Game {
             switch (typeAction) {
 
                 case 1:
-                    c.fight(combattant);
+                    ArrayList<Combattant> cibleAttack = new ArrayList<>();
+                    int compteurId = 1;
+                    for(Combattant combattant :e) {
+                        cibleAttack.add(combattant);
+                        System.out.println(compteurId + "- " + combattant.getName() + " : " + combattant.getHealthPoint() + " PV");
+                        compteurId++;
+                    }
+                    Scanner choixAttack = new Scanner(System.in);
+                    int idAttack = choixAttack.nextInt();
+                    Ennemy ennemy = e.get((idAttack-1));
+                    c.fight(ennemy);
+                    if (ennemy.getHealthPoint() <= 0) {
+                        e.remove((idAttack-1));
+                        System.out.println("Les Héros ont vaincu " + ennemy.getName() + " !");
+                    }
                     break;
 
                 case 2:
@@ -436,7 +489,22 @@ public class Game {
                         int idSoin = choixSoin.nextInt();
                         c.special(h.get((idSoin-1)));
                     }else{
-                        c.special(combattant);
+                        cibleAttack = new ArrayList<>();
+                        compteurId = 1;
+                        for(Combattant combattant :e) {
+                            cibleAttack.add(combattant);
+                            System.out.println(compteurId + "- " + combattant.getName() + " : " + combattant.getHealthPoint() + " PV");
+                            compteurId++;
+                        }
+                        Scanner choixAttackSpe = new Scanner(System.in);
+                        idAttack = choixAttackSpe.nextInt();
+                        ennemy = e.get((idAttack-1));
+                        c.special(ennemy);
+                        if (ennemy.getHealthPoint() <= 0) {
+                            e.remove((idAttack-1));
+                            System.out.println("Les Héros ont vaincu " + ennemy.getName() + " !");
+                        }
+
                     }
                     break;
 
@@ -648,6 +716,12 @@ public class Game {
         System.out.println("#########################");
     }
 
+    private static void supprimeListe(List<Ennemy> e){
+        if (e.size() > 0) {
+            e.subList(0, e.size()).clear();
+        }
+    }
+
 
 //    #################################################################################################################
 //                                                  LISTE
@@ -702,6 +776,13 @@ public class Game {
             "Dotraug",
             "Gazazak",
             "Ardnok"};
+
+    static String[] nomGolem = {"Bruhn",
+            "Dhukur",
+            "Ruinrak",
+            "Gozzlehn",
+            "Garbom",
+            "Ghok"};
 
 
 

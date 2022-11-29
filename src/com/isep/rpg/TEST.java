@@ -61,9 +61,27 @@ import java.util.*;
     }*/
     public class TEST {
         public static void main(String[] args) {
+            System.out.println("\033[4;33m" + "Le Slime" + "\033[0m"); //Jaune
+            System.out.println("\033[1;93m" + "Le Slime" + "\033[0m");
+            System.out.println("\033[43m" + "Le Slime" + "\033[0m");
+            System.out.println("\033[0;93m" + "Le Slime" + "\033[0m");
+            System.out.println("\033[1;93m" + "Le Slime" + "\033[0m");
 
 
-            /*Random random = new Random();
+            System.out.println("\033[4;35m" + "Le Slime" + "\033[0m"); //Violet
+            System.out.println("\033[1;35m" + "Le Slime" + "\033[0m");
+
+            System.out.println("\033[4;34m" + "Le Slime" + "\033[0m"); //Bleu
+            System.out.println("\033[1;34m" + "Le Slime" + "\033[0m");
+
+
+            /*Jaune:033[1;93m
+            Rose:033[0;31m
+
+
+
+
+            Random random = new Random();
             for (int i = 0; i< 10 ; i++) {
                 int int_random = random.nextInt( 4);
                 System.out.println(int_random);

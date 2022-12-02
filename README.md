@@ -4,8 +4,6 @@
 
 
 0)  [Interface graphique]
-1) Upgrade de fin de manche
-2) Nombre d'ennemi proportionnel au nombre de héro -> à check
 
 
 
@@ -29,3 +27,5 @@
 10) Ordre attaque Héro/Ennemy aléatoire
 11) Point d'armure
 12) Loot de fin de manche
+13) Upgrade de fin de manche
+14) Nombre d'ennemi proportionnel au nombre de héro

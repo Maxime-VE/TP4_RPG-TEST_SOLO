@@ -42,7 +42,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Warrior : ");
                     Scanner scan1 = new Scanner(System.in);
                     String nom_Hero1 = scan1.nextLine();
-                    Warrior w = new Warrior("\033[1;32m"+nom_Hero1+"\033[0m", 37, 10, false, 5);
+                    Warrior w = new Warrior("\033[1;32m"+nom_Hero1+"\033[0m", 45, 13, false, 4);
                     w.take( new Weapon("Couteau","Commun", 1) );
                     heros.add(w);
                     break;
@@ -51,7 +51,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Hunter : ");
                     Scanner scan2 = new Scanner(System.in);
                     String nom_Hero2 = scan2.nextLine();
-                    Hunter hu = new Hunter("\033[1;32m"+nom_Hero2+"\033[0m", 22, 5, false, 3);
+                    Hunter hu = new Hunter("\033[1;32m"+nom_Hero2+"\033[0m", 37, 11, false, 3);
                     hu.take( new Weapon("Arc","Commun", 1) );
                     heros.add(hu);
                     break;
@@ -60,7 +60,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Mage : ");
                     Scanner scan3 = new Scanner(System.in);
                     String nom_Hero3 = scan3.nextLine();
-                    Mage m = new Mage("\033[1;32m"+nom_Hero3+"\033[0m", 16, 3, false, 3, 40);
+                    Mage m = new Mage("\033[1;32m"+nom_Hero3+"\033[0m", 34, 8, false, 3, 65);
                     m.take( new Weapon("Baguette d'apprenti","Commun", 1) );
                     heros.add(m);
                     break;
@@ -69,7 +69,7 @@ public class Game {
                     System.out.println("Choisissez le nom de votre Healer : ");
                     Scanner scan4 = new Scanner(System.in);
                     String nom_Hero4 = scan4.nextLine();
-                    Healer h = new Healer("\033[1;32m"+nom_Hero4+"\033[0m", 14, 2, false, 2, 50);
+                    Healer h = new Healer("\033[1;32m"+nom_Hero4+"\033[0m", 36, 5, false, 2, 55);
                     h.take( new Weapon("Bracelet de renforcement","Commun", 1) );
                     heros.add(h);
                     break;
@@ -96,26 +96,31 @@ public class Game {
         int nombreEnnemy = (int) ((heros.size()/2)+1);
         for (int i=0; i<nombreEnnemy ; i++) {
             nomEnnemy = nommageEnnemy(nomSlime);
-            Slime s = new Slime("\033[1;31m"+nomEnnemy + ", Le Slime"+"\033[0m", 10, 2, false, 0, "Slime");
+            Slime s = new Slime("\033[1;31m"+nomEnnemy + ", Le Slime"+"\033[0m", 18, 7, false, 0, "Slime");
             manche1.add(s);
         }
         enemiesList.add(manche1);
 
         nomEnnemy =nommageEnnemy(nomGolem);
-        Golem golem = new Golem("\033[1;31m"+nomEnnemy+"\033[0m", 15,3,false,0, "Golem");
+        Golem golem = new Golem("\033[1;31m"+nomEnnemy+"\033[0m", 50,12,false,0, "Golem");
         manche2.add(golem);
         enemiesList.add(manche2);
 
 
         for (int i=0; i<nombreEnnemy ; i++) {
             nomEnnemy = nommageEnnemy(nomGoblin);
-            Goblin g = new Goblin("\033[1;31m"+nomEnnemy+"\033[0m", 15, 3, false, 0, "Goblin");
+            Goblin g = new Goblin("\033[1;31m"+nomEnnemy+"\033[0m", 25, 15, false, 0, "Goblin");
             manche3.add(g);
         }
         enemiesList.add(manche3);
 
         nomEnnemy = nommageEnnemy(nomDragon);
-        Dragon d = new Dragon("\033[1;31m"+nomEnnemy+"\033[0m", 26, 20, false, 0, "Dragon");
+        Dragon d = new Dragon("\033[1;31m"+nomEnnemy+"\033[0m", 102, 21, false, 0, "Dragon");
+        manche4.add(d);
+        enemiesList.add(manche4);
+
+        nomEnnemy = nommageEnnemy(nomRoi);
+        Roidemon r = new Roidemon("\033[1;31m"+nomEnnemy+"\033[0m", 172, 23, false, 0, "Roi démon");
         manche4.add(d);
         enemiesList.add(manche4);
 
@@ -783,6 +788,14 @@ public class Game {
             "Gozzlehn",
             "Garbom",
             "Ghok"};
+    static String[] nomRoi = {"Reshbus",
+            "Limamas",
+            "Raulf",
+            "Gothushang",
+            "Reondae",
+            "Sauba",
+            "Rithzarg",
+            "Emaran"};
 
 
 

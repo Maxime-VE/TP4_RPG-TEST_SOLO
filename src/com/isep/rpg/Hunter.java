@@ -139,6 +139,6 @@ public class Hunter extends Hero{
     public int degatTotal = degat;
     private Weapon weapon;
     public int degatSpecial = 0;
-    int compteurFleche = 1;
+    int compteurFleche = 6;
     public int bonusVie = 0;
 }
